@@ -1,4 +1,4 @@
-grammar Expr;
+grammar MiGramatica;
 
 prog
     : (declaracion NEWLINE)* EOF

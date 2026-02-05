@@ -4,6 +4,10 @@ grammar MiGramatica;
 package com.lab1compiladores;
 }
 
+// =======================
+// Parser
+// =======================
+
 prog
     : (declaracion NEWLINE)* EOF
     ;
@@ -26,21 +30,19 @@ hexDecl
     : HEX_ID '=' HEX
     ;
 
+// =======================
+// Lexer
+// =======================
+
 BIN_ID : 'BIN' ;
 B4_ID  : 'B4' ;
 HEX_ID : 'HEX' ;
 
-BINARIO
-    : [01]+;
+BINARIO : [01]+ ;
+BASE4   : [0-3]+ ;
+HEX     : [0-9A-Fa-f]+ ;
 
-BASE4
-    : [0-3]* [2-3] [0-3]*;
+NEWLINE : [\r\n]+ ;
+WS      : [ \t]+ -> skip ;
 
-HEX
-    : [0-9A-Fa-f]+;
-
-NEWLINE
-    : [\r\n]+;
-
-WS
-    : [ \t]+ -> skip;
+COMMENT : '#' ~[\r\n]* -> skip ;

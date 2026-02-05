@@ -5,42 +5,35 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
+import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.Token;
 
+public class App {
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-      Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
 
         while (continuar) {
 
             try {
-
-                //Se selecciona el archivo que se desea analizar
                 String ruta = TxtManager.seleccionarArchivoTxt();
 
                 if (ruta == null) {
-                    System.out.println("No se selecciono ningun archivo");
+                    System.out.println("No se seleccionó ningún archivo.");
                 } else {
-
-                    //Es lo que usa el ANTRL para poder leer los caracteres 
                     CharStream input = CharStreams.fromFileName(ruta);
-
-                    //Es creada por ANTRL para hacer convertir en tokens
                     MiGramaticaLexer lexer = new MiGramaticaLexer(input);
-
-                    //Guarda los tokens en el orden que el parser necesite
                     CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-                    //Genere y recorre token para obtener su tipo e imprimirlo
                     tokens.fill();
-                    System.out.println("\n----Tokens----");
+                    System.out.println("\n---- Tokens ----");
                     for (Token token : tokens.getTokens()) {
                         String nombreToken = MiGramaticaLexer.VOCABULARY
                                 .getSymbolicName(token.getType());
@@ -50,44 +43,52 @@ public class App
                                 " | Texto: " + token.getText()
                         );
                     }
-
-                    //Va analizando desde el inicio y verifica que cumpla la estructura 
                     List<String> lineas = Files.readAllLines(Paths.get(ruta));
+                    int numLinea = 1;
 
-int numLinea = 1;
+                    for (String linea : lineas) {
 
-for (String linea : lineas) {
+                        if (linea.trim().isEmpty()) {
+                            numLinea++;
+                            continue;
+                        }
 
-    if (linea.trim().isEmpty()) {
-        numLinea++;
-        continue;
-    }
+                        CharStream inputLinea = CharStreams.fromString(linea + "\n");
+                        MiGramaticaLexer lexerLinea = new MiGramaticaLexer(inputLinea);
+                        CommonTokenStream tokensLinea = new CommonTokenStream(lexerLinea);
+                        MiGramaticaParser parserLinea = new MiGramaticaParser(tokensLinea);
+                        parserLinea.removeErrorListeners();
+                        parserLinea.addErrorListener(new BaseErrorListener() {
+                            @Override
+                            public void syntaxError(
+                                    Recognizer<?, ?> recognizer,
+                                    Object offendingSymbol,
+                                    int line,
+                                    int charPositionInLine,
+                                    String msg,
+                                    RecognitionException e) {
+                                throw new RuntimeException("Error sintáctico");
+                            }
+                        });
 
-    CharStream inputLinea = CharStreams.fromString(linea);
+                        try {
+                            parserLinea.prog();
+                            System.out.println("Línea " + numLinea + " correcta");
+                        } catch (Exception e) {
+                            System.out.println("Error en línea " + numLinea);
+                        }
 
-    MiGramaticaLexer lexerLinea = new MiGramaticaLexer(inputLinea);
-    CommonTokenStream tokensLinea = new CommonTokenStream(lexerLinea);
-    MiGramaticaParser parserLinea = new MiGramaticaParser(tokensLinea);
-
-    try {
-        parserLinea.declaracion(); // 👈 ESTA ES LA CLAVE
-        System.out.println("✔ Línea " + numLinea + " correcta");
-    } catch (Exception e) {
-        System.out.println("❌ Error en línea " + numLinea);
-    }
-
-    numLinea++;
-}
-
+                        numLinea++;
+                    }
                 }
 
             } catch (Exception e) {
-                System.out.println("Error del analisis:");
+                System.out.println("Error durante el análisis:");
                 e.printStackTrace();
             }
 
-            //Se le pregunta al usuario si quiere analizar otro documento
-            System.out.println("¿Desea analizar otro documento? (si/no)");
+            // Repetir análisis
+            System.out.println("\n¿Desea analizar otro documento? (si/no)");
             String respuesta = scanner.nextLine();
 
             if (!respuesta.equalsIgnoreCase("si")) {
@@ -95,7 +96,7 @@ for (String linea : lineas) {
             }
         }
 
-        System.out.println("Muchas gracias por analizar sus documentos con nosotros");
+        System.out.println("Muchas gracias por usar el analizador.");
         scanner.close();
     }
 }

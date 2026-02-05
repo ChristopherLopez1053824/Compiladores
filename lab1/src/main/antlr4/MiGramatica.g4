@@ -44,3 +44,5 @@ HEX     : [0-9A-Fa-f]+ ;
 
 NEWLINE : [\r\n]+ ;
 WS      : [ \t]+ -> skip ;
+
+COMMENT : '#' ~[\r\n]* -> skip ;

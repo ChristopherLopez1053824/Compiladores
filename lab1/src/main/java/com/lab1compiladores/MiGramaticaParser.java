@@ -20,7 +20,7 @@ public class MiGramaticaParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, BIN_ID=2, B4_ID=3, HEX_ID=4, BINARIO=5, BASE4=6, HEX=7, NEWLINE=8, 
-		WS=9;
+		WS=9, COMMENT=10;
 	public static final int
 		RULE_prog = 0, RULE_declaracion = 1, RULE_binDecl = 2, RULE_b4Decl = 3, 
 		RULE_hexDecl = 4;
@@ -40,7 +40,7 @@ public class MiGramaticaParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, "BIN_ID", "B4_ID", "HEX_ID", "BINARIO", "BASE4", "HEX", "NEWLINE", 
-			"WS"
+			"WS", "COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -357,7 +357,7 @@ public class MiGramaticaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\t&\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\n&\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
 		"\u0000\u0001\u0000\u0001\u0000\u0005\u0000\u000e\b\u0000\n\u0000\f\u0000"+
 		"\u0011\t\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001"+

@@ -1,5 +1,8 @@
 package com.lab1compiladores;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 import org.antlr.v4.runtime.CharStream;
@@ -48,13 +51,34 @@ public class App
                         );
                     }
 
-                    //Trabaja con los tokens que se generaron para el parser 
-                    MiGramaticaParser parser = new MiGramaticaParser(tokens);
-
                     //Va analizando desde el inicio y verifica que cumpla la estructura 
-                    parser.prog();
+                    List<String> lineas = Files.readAllLines(Paths.get(ruta));
 
-                    System.out.println("\nLa estructura si cumple\n");
+int numLinea = 1;
+
+for (String linea : lineas) {
+
+    if (linea.trim().isEmpty()) {
+        numLinea++;
+        continue;
+    }
+
+    CharStream inputLinea = CharStreams.fromString(linea);
+
+    MiGramaticaLexer lexerLinea = new MiGramaticaLexer(inputLinea);
+    CommonTokenStream tokensLinea = new CommonTokenStream(lexerLinea);
+    MiGramaticaParser parserLinea = new MiGramaticaParser(tokensLinea);
+
+    try {
+        parserLinea.declaracion(); // 👈 ESTA ES LA CLAVE
+        System.out.println("✔ Línea " + numLinea + " correcta");
+    } catch (Exception e) {
+        System.out.println("❌ Error en línea " + numLinea);
+    }
+
+    numLinea++;
+}
+
                 }
 
             } catch (Exception e) {

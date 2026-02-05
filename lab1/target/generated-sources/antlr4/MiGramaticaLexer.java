@@ -1,4 +1,7 @@
 // Generated from MiGramatica.g4 by ANTLR 4.13.1
+
+package com.lab1compiladores;
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

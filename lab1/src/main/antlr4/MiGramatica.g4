@@ -1,5 +1,9 @@
 grammar MiGramatica;
 
+@header {
+package com.lab1compiladores;
+}
+
 prog
     : (declaracion NEWLINE)* EOF
     ;

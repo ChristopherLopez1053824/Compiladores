@@ -1,7 +1,11 @@
 package com.lab1compiladores;
 
-import org.antlr.v4.runtime.*;
 import java.util.Scanner;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
 
 
 public class Main {

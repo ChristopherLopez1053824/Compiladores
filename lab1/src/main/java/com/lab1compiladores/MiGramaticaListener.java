@@ -59,4 +59,64 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHexDecl(MiGramaticaParser.HexDeclContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresion}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresion(MiGramaticaParser.ExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresion}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresion(MiGramaticaParser.ExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionP}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionP(MiGramaticaParser.ExpresionPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionP}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionP(MiGramaticaParser.ExpresionPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#termino}.
+	 * @param ctx the parse tree
+	 */
+	void enterTermino(MiGramaticaParser.TerminoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#termino}.
+	 * @param ctx the parse tree
+	 */
+	void exitTermino(MiGramaticaParser.TerminoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#terminoP}.
+	 * @param ctx the parse tree
+	 */
+	void enterTerminoP(MiGramaticaParser.TerminoPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#terminoP}.
+	 * @param ctx the parse tree
+	 */
+	void exitTerminoP(MiGramaticaParser.TerminoPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#factor}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactor(MiGramaticaParser.FactorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#factor}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactor(MiGramaticaParser.FactorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#numero}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumero(MiGramaticaParser.NumeroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#numero}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumero(MiGramaticaParser.NumeroContext ctx);
 }

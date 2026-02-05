@@ -1,5 +1,8 @@
 // Generated from MiGramatica.g4 by ANTLR 4.13.1
 
+package com.lab1compiladores;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -28,13 +31,49 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumero(MiGramaticaParser.NumeroContext ctx) { }
+	@Override public void enterDeclaracion(MiGramaticaParser.DeclaracionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumero(MiGramaticaParser.NumeroContext ctx) { }
+	@Override public void exitDeclaracion(MiGramaticaParser.DeclaracionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinDecl(MiGramaticaParser.BinDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinDecl(MiGramaticaParser.BinDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterB4Decl(MiGramaticaParser.B4DeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitB4Decl(MiGramaticaParser.B4DeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHexDecl(MiGramaticaParser.HexDeclContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHexDecl(MiGramaticaParser.HexDeclContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

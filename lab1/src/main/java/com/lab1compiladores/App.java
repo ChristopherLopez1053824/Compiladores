@@ -15,21 +15,23 @@ import org.antlr.v4.runtime.Token;
 public class App {
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
 
+        // Mapas para almacenar tipos y valores de variables
+        Map<String, String> tiposVariables = new HashMap<>();
+        Map<String, Integer> valoresVariables = new HashMap<>();
+
         while (continuar) {
             try {
+                // Selección de archivo
                 String ruta = TxtManager.seleccionarArchivoTxt();
                 if (ruta == null) {
                     System.out.println("No se seleccionó ningún archivo.");
                     continue;
                 }
 
-                // Leer todo el archivo
                 List<String> lineas = Files.readAllLines(Paths.get(ruta));
-                Map<String, String> variables = new HashMap<>();
                 int numLinea = 1;
 
                 for (String linea : lineas) {
@@ -44,57 +46,68 @@ public class App {
                     CommonTokenStream tokens = new CommonTokenStream(lexer);
                     tokens.fill();
 
-                    // Mostrar tokens y validarlos
+                    boolean errorLinea = false;
+
+                    // Procesar declaraciones y mostrar tokens
                     for (Token t : tokens.getTokens()) {
-                        if (t.getType() == Token.EOF) continue;
+                        if (t.getType() == Token.EOF || t.getType() == MiGramaticaLexer.WS
+                                || t.getType() == MiGramaticaLexer.COMMENT)
+                            continue;
 
                         String tipo = MiGramaticaLexer.VOCABULARY.getSymbolicName(t.getType());
-                        if (tipo == null) tipo = "DESCONOCIDO";
                         String texto = t.getText();
                         String estado = "válido";
 
-                        // Validar declaraciones
+                        // Declaración de variables
                         if ("BIN_ID".equals(tipo) || "B4_ID".equals(tipo) || "HEX_ID".equals(tipo)) {
                             int index = tokens.getTokens().indexOf(t);
                             if (tokens.getTokens().size() > index + 3) {
                                 Token idToken = tokens.getTokens().get(index + 1);
                                 Token valorToken = tokens.getTokens().get(index + 3);
-                                variables.put(idToken.getText(), tipo);
+                                tiposVariables.put(idToken.getText(), tipo);
 
-                                if (!validarBase(tipo, valorToken.getText())) {
-                                    estado = "¡ERROR: valor no coincide con tipo!";
+                                int valorDecimal = ShuntingYard.convertirValor(tipo, valorToken.getText());
+                                if (valorDecimal == -1) {
+                                    estado = "¡Error: valor no coincide con tipo!";
+                                    errorLinea = true;
+                                } else {
+                                    valoresVariables.put(idToken.getText(), valorDecimal);
                                 }
                             }
                         }
 
-                        // Validar IDs en expresiones
-                        if ("ID".equals(tipo) && !variables.containsKey(texto)) {
-                            estado = "¡ERROR: variable no declarada!";
+                        // Variables en expresiones
+                        if ("ID".equals(tipo) && !tiposVariables.containsKey(texto)) {
+                            estado = "¡Error: variable no declarada!";
+                            errorLinea = true;
                         }
 
                         System.out.println("Token: " + tipo + " | Texto: " + texto + " | " + estado);
                     }
 
-                    // Convertir expresión a RPN si hay tokens de expresión
-                    List<Token> exprTokens = tokens.getTokens().stream()
-                            .filter(t -> t.getType() != Token.EOF &&
-                                    (t.getType() == MiGramaticaLexer.ID ||
-                                     t.getType() == MiGramaticaLexer.BINARIO ||
-                                     t.getType() == MiGramaticaLexer.BASE4 ||
-                                     t.getType() == MiGramaticaLexer.HEX ||
-                                     t.getType() == MiGramaticaLexer.PLUS ||
-                                     t.getType() == MiGramaticaLexer.MINUS ||
-                                     t.getType() == MiGramaticaLexer.MUL ||
-                                     t.getType() == MiGramaticaLexer.DIV ||
-                                     t.getType() == MiGramaticaLexer.LPAREN ||
-                                     t.getType() == MiGramaticaLexer.RPAREN))
-                            .toList();
+                    // Preparar tokens para Shunting Yard
+                    List<Token> exprTokens = ShuntingYard.prepararTokens(tokens.getTokens(), valoresVariables);
 
+                    // Evaluar la expresión
                     if (!exprTokens.isEmpty()) {
                         List<Token> rpn = ShuntingYard.convertir(exprTokens);
                         System.out.print("RPN: ");
                         for (Token t : rpn) System.out.print(t.getText() + " ");
                         System.out.println();
+
+                        try {
+                            int resultado = ShuntingYard.evaluarRPN(rpn);
+                            System.out.println("Resultado: " + resultado);
+                        } catch (Exception e) {
+                            System.out.println("¡Error al evaluar la expresión!");
+                            errorLinea = true;
+                        }
+                    }
+
+                    if (!errorLinea && !exprTokens.isEmpty()) {
+                        System.out.println("Línea " + numLinea + " válida");
+                    } else if (!exprTokens.isEmpty()) {
+                        System.out.println("Línea " + numLinea + " con errores");
                     }
 
                     numLinea++;
@@ -114,15 +127,5 @@ public class App {
 
         System.out.println("Muchas gracias por usar el analizador.");
         scanner.close();
-    }
-
-    // Validar que el número concuerde con la base
-    private static boolean validarBase(String tipo, String valor) {
-        switch (tipo) {
-            case "BIN_ID": return valor.matches("[01]+");
-            case "B4_ID":  return valor.matches("[0-3]+");
-            case "HEX_ID": return valor.matches("[0-9A-Fa-f]+");
-            default: return false;
-        }
     }
 }

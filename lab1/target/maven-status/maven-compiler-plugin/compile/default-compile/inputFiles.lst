@@ -1,7 +1,9 @@
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/target/generated-sources/antlr4/MiGramaticaLexer.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/target/generated-sources/antlr4/MiGramaticaListener.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/target/generated-sources/antlr4/MiGramaticaBaseListener.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/target/generated-sources/antlr4/MiGramaticaParser.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/src/main/java/com/lab1compiladores/TxtManager.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/src/main/java/com/lab1compiladores/App.java
-/home/christopher/Documentos/Compiladores/Compiladores/lab1/src/main/java/com/lab1compiladores/ShuntingYard.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaVisitor.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaBaseListener.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaBaseVisitor.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaListener.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/App.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/TxtManager.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaParser.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/antlr/MiGramaticaLexer.java
+/home/christopher/Documentos/lab1/lab1/src/main/java/com/compiladores/ShuntingYard.java

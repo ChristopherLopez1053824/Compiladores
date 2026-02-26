@@ -59,21 +59,13 @@ public class App
                         String tipo = MiGramaticaLexer.VOCABULARY.getSymbolicName(t.getType());
                         String valor = t.getText();
                         String estado = "válido";
-                        System.out.println("Token: " + valor + " | Tipo: " + tipo);
                         // Si no existe nombre simbólico conocido, considerarlo error
-                        if (MiGramaticaLexer.VOCABULARY.getSymbolicName(t.getType()) == null) {
+                        if (t.getType() == MiGramaticaLexer.ERROR_CHAR) {
                             estado = "inválido";
-                            errorLinea = true;
                         }
                         System.out.println("Token: " + valor + " | Tipo: " + tipo);
                         System.out.println("Estado: " + estado);
                     }
-                    if (!errorLinea) {
-                        System.out.println("Línea " + numLinea + " válida");
-                    } else if (errorLinea) {
-                        System.out.println("Línea " + numLinea + " con errores");
-                    }
-
                     numLinea++;
                 }
 

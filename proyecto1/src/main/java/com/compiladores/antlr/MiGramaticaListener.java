@@ -110,6 +110,26 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitDentro(MiGramaticaParser.DentroContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#accesoArreglo}.
+	 * @param ctx the parse tree
+	 */
+	void enterAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#accesoArreglo}.
+	 * @param ctx the parse tree
+	 */
+	void exitAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#asignacionSinPuntoYComa}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#asignacionSinPuntoYComa}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#asignacion}.
 	 * @param ctx the parse tree
 	 */
@@ -179,6 +199,66 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpresiones(MiGramaticaParser.ExpresionesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionLogica}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionLogica(MiGramaticaParser.ExpresionLogicaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionLogica}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionLogica(MiGramaticaParser.ExpresionLogicaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionIgualdad_diferencia}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionIgualdad_diferencia}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionRelacional}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionRelacional(MiGramaticaParser.ExpresionRelacionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionRelacional}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionRelacional(MiGramaticaParser.ExpresionRelacionalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionSum_Rest}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionSum_Rest}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionMult_Div}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionMult_Div}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionUnaria}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresionUnaria(MiGramaticaParser.ExpresionUnariaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionUnaria}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresionUnaria(MiGramaticaParser.ExpresionUnariaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#constantes}.
 	 * @param ctx the parse tree

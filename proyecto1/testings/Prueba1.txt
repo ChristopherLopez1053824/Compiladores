@@ -1,0 +1,5 @@
+pueblo celestial Prueba1{
+	pueblo magico vasto comienza(Cancion[] alegre) {
+		Divulga("Hola mundo!");
+	}
+}

@@ -1,0 +1,13 @@
+pueblo celestial Prueba4 {
+
+    pueblo magico intenso sumar(intenso a, intenso b) {
+        FelicesParaSiempre a + b;
+    }
+
+    pueblo magico vasto comienza(Cancion[] alegre) {
+
+        intenso resultado = sumar(5, 3);
+        Divulga("La suma es: " + resultado);
+
+    }
+}

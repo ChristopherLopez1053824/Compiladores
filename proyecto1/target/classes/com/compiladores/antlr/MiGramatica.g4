@@ -4,9 +4,16 @@ package com.compiladores.antlr;
 }
 
 // PARSER
-
 programa
-    : clase+ EOF
+    : importacion* clase+ EOF
+    ;
+
+importacion
+    : CONVOCA nombreCompleto PUNTO_Y_COMA
+    ;
+
+nombreCompleto
+    : ID (PUNTO ID)*
     ;
 
 clase
@@ -63,6 +70,14 @@ dentro
     | printDentro
     ;
 
+accesoArreglo
+    : ID CORCHETE_A expresiones CORCHETE_C
+    ;
+
+asignacionSinPuntoYComa
+    : (ID | accesoArreglo) IGUAL expresiones
+    ;
+
 asignacion
     : ID IGUAL expresiones PUNTO_Y_COMA
     ;
@@ -85,6 +100,10 @@ cicloFor
       dentro
     ;
 
+arreglo
+    : LLAVE_A expresiones (COMA expresiones)* LLAVE_C
+    ;
+
 returnDentro
     : RETURN expresiones? PUNTO_Y_COMA
     ;
@@ -93,22 +112,41 @@ printDentro
     : SYSTEM_OUT_PRINTLN PARENTESIS_A expresiones? PARENTESIS_C PUNTO_Y_COMA
     ;
 
+
+
 // -------- EXPRESIONES --------
 
 expresiones
-    : expresiones MULTIPLICACION expresiones
-    | expresiones DIVISION expresiones
-    | expresiones SUMA expresiones
-    | expresiones RESTA expresiones
-    | expresiones IGUALDAD expresiones
-    | expresiones DIFERENCIA expresiones
-    | expresiones MAYOR_MENOR_IGUALQUE expresiones
-    | expresiones OPERADORES_LOGICOS expresiones
-    | PARENTESIS_A expresiones PARENTESIS_C
-    | constantes
-    | ID
+    : expresionLogica
     ;
 
+expresionLogica
+    : expresionIgualdad_diferencia (OPERADORES_LOGICOS expresionIgualdad_diferencia)*
+    ;
+
+expresionIgualdad_diferencia
+    : expresionRelacional ((IGUALDAD | DIFERENCIA) expresionRelacional)*
+    ;
+
+expresionRelacional
+    : expresionSum_Rest (MAYOR_MENOR_IGUALQUE expresionSum_Rest)*
+    ;
+
+expresionSum_Rest
+    : expresionMult_Div ((SUMA | RESTA) expresionMult_Div)*
+    ;
+
+expresionMult_Div
+    : expresionUnaria ((MULTIPLICACION | DIVISION) expresionUnaria)*
+    ;
+
+expresionUnaria
+    : PARENTESIS_A expresiones PARENTESIS_C
+    | constantes
+    | accesoArreglo
+    | ID
+    ;
+    
 constantes
     : INT_CONSTANTE
     | FLOAT_CONSTANTE
@@ -117,38 +155,43 @@ constantes
     | BOOLEAN_CONSTANTE
     ;
 
-// LEXER
+
+
+// ----------- LEXER ---------------
 
 // ---- PALABRAS RESERVADAS ----
-CLASS     : 'Celestial';
-PUBLIC    : 'Pueblo';
-STATIC    : 'Magico';
-VOID      : 'Vasto';
-ARGS      : 'Alegre';
-NEW       : 'Novedad';
-MAIN      : 'Comienza';
+CONVOCA : 'convoca';
+PUNTO : '.';
+CLASS     : 'celestial';
+PUBLIC    : 'pueblo';
+STATIC    : 'magico';
+VOID      : 'vasto';
+ARGS      : 'alegre';
+NEW       : 'despertar';
+MAIN      : 'comienza';
 
-INT       : 'Intenso';
-FLOAT     : 'Fenix';
-DOUBLE    : 'Dorado';
-LONG      : 'Dragon';
-SHORT     : 'Sapo';
-BYTE      : 'Boo';
-CHAR      : 'Chispa';
-BOOLEAN   : 'Bondad';
+INT       : 'intenso';
+FLOAT     : 'fenix';
+DOUBLE    : 'dorado';
+LONG      : 'dragon';
+SHORT     : 'sapo';
+BYTE      : 'boo';
+CHAR      : 'chispa';
+BOOLEAN   : 'bondad';
 STRING    : 'Cancion';
-NULL      : 'Invisible';
+NULL      : 'invisible';
 
-IF        : 'Destino';
-ELSE      : 'Alterno';
-DO        : 'Domina';
-WHILE     : 'Guardian';
-FOR       : 'Viaje';
-RETURN    : 'VivieronFelicesParaSiempre';
-SWITCH    : 'Cambio';
-CASE      : 'Perspectiva';
-
+IF        : 'destino';
+ELSE      : 'alterno';
+DO        : 'domina';
+WHILE     : 'guardian';
+FOR       : 'viaje';
+RETURN    : 'felices';
+SWITCH    : 'hechizos';
+CASE      : 'capitulo';
 SYSTEM_OUT_PRINTLN    : 'Divulga';
+SYSTEM_IN : 'enredada';
+
 
 // ---- CONSTANTES ----
 INT_CONSTANTE
@@ -200,5 +243,31 @@ LINE_COMMENT
     ;
 
 BLOCK_COMMENT
-    : '/' .? '*/' -> skip
+    : '/*' .*? '*/' -> skip
+    ;
+
+UNCLOSED_COMMENT
+    : '/*' .*? EOF
+      { System.out.println("Error: comentario sin cerrar en línea " + getLine()); }
+    ;
+    
+INVALID_FLOAT
+    : [0-9]+ '.' 
+      { System.out.println("Error: número decimal mal formado en línea " + getLine()); }
+    ;
+INVALID_ID
+    : [0-9]+ [a-zA-Z_]+
+      { System.out.println("Error: identificador inválido en línea " + getLine()); }
+    ;
+UNCLOSED_CHAR
+: '\'' .*
+    { System.out.println("Error: carácter mal formado en línea " + getLine()); }
+;
+UNCLOSED_STRING
+    : '"' (~["\r\n])*
+      { System.out.println("Error: cadena sin cerrar en línea " + getLine()); }
+    ;
+
+ERROR_CHAR
+    : .
     ;

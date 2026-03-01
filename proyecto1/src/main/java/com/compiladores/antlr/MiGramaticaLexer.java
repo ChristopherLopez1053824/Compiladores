@@ -161,35 +161,35 @@ public class MiGramaticaLexer extends Lexer {
 	private void UNCLOSED_COMMENT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 0:
-			 System.out.println("Error: comentario sin cerrar en línea " + getLine()); 
+			 System.out.println("Error: comentario sin cerrar en línea "); 
 			break;
 		}
 	}
 	private void INVALID_FLOAT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 1:
-			 System.out.println("Error: número decimal mal formado en línea " + getLine()); 
+			 System.out.println("Error: número decimal mal formado en línea "); 
 			break;
 		}
 	}
 	private void INVALID_ID_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 2:
-			 System.out.println("Error: identificador inválido en línea " + getLine()); 
+			 System.out.println("Error: identificador inválido en línea "); 
 			break;
 		}
 	}
 	private void UNCLOSED_CHAR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 3:
-			 System.out.println("Error: carácter mal formado en línea " + getLine()); 
+			 System.out.println("Error: carácter mal formado en línea "); 
 			break;
 		}
 	}
 	private void UNCLOSED_STRING_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 4:
-			 System.out.println("Error: cadena sin cerrar en línea " + getLine()); 
+			 System.out.println("Error: cadena sin cerrar en línea "); 
 			break;
 		}
 	}

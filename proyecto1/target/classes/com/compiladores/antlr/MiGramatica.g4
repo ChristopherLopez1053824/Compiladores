@@ -248,24 +248,24 @@ BLOCK_COMMENT
 
 UNCLOSED_COMMENT
     : '/*' .*? EOF
-      { System.out.println("Error: comentario sin cerrar en línea " + getLine()); }
+      { System.out.println("Error: comentario sin cerrar en línea "); }
     ;
     
 INVALID_FLOAT
     : [0-9]+ '.' 
-      { System.out.println("Error: número decimal mal formado en línea " + getLine()); }
+      { System.out.println("Error: número decimal mal formado en línea "); }
     ;
 INVALID_ID
     : [0-9]+ [a-zA-Z_]+
-      { System.out.println("Error: identificador inválido en línea " + getLine()); }
+      { System.out.println("Error: identificador inválido en línea "); }
     ;
 UNCLOSED_CHAR
 : '\'' .*
-    { System.out.println("Error: carácter mal formado en línea " + getLine()); }
+    { System.out.println("Error: carácter mal formado en línea "); }
 ;
 UNCLOSED_STRING
     : '"' (~["\r\n])*
-      { System.out.println("Error: cadena sin cerrar en línea " + getLine()); }
+      { System.out.println("Error: cadena sin cerrar en línea "); }
     ;
 
 ERROR_CHAR

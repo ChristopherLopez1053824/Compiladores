@@ -1,0 +1,19 @@
+convoca java.util.Scanner;
+
+pueblo celestial Prueba5 {
+    pueblo magico vasto comienza(Cancion[] alegre) {
+
+        Scanner sc = new Scanner(enredada);
+
+        intenso numero = 0;
+
+        domina (numero != 5) {
+            Divulga("Escribe el numero 5 para salir: ");
+            numero = sc.nextInt();
+        }
+
+        Divulga("Programa terminado");
+
+        sc.close();
+    }
+}

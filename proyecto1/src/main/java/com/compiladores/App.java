@@ -64,7 +64,6 @@ public class App
                             estado = "inválido";
                         }
                         System.out.println("Token: " + valor + " | Tipo: " + tipo);
-                        System.out.println("Estado: " + estado);
                     }
                     numLinea++;
                 }

@@ -1,7 +1,7 @@
 pueblo celestial Prueba4 {
 
     pueblo magico intenso sumar(intenso a, intenso b) {
-        FelicesParaSiempre a + b;
+        felices a + b;
     }
 
     pueblo magico vasto comienza(Cancion[] alegre) {

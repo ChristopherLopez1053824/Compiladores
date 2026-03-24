@@ -1,12 +1,10 @@
 convoca java.lang.Math;
 
-pueblo celestial Prueba6 {
-    pueblo magico vasto comienza(Cancion[] alegre) {
+comienza {
 
-        dorado numero = 16;
+   dorado numero = 16;
 
-        dorado raiz = Math.sqrt(numero);
+   dorado raiz = sqrt(numero);
 
-        Divulga("La raíz cuadrada es: " + raiz);
-    }
+   Divulga("La raíz cuadrada es: " + raiz);
 }

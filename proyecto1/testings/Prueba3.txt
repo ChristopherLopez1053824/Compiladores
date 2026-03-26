@@ -4,7 +4,7 @@ comienza {
    intenso edad;
 
    Divulga("Ingresa tu edad: ");
-   leer(edad);
+   escuchar(edad);
 
    destino (edad >= 18) {
       Divulga("Eres mayor de edad");

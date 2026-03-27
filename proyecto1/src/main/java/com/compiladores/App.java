@@ -73,6 +73,7 @@ public class App
                             System.out.println("Token: " + nombreToken + " -> " + t.getText());
                         }
                     }
+                tokens.seek(0);
                 MiGramaticaParser parser = new MiGramaticaParser(tokens);
                 parser.removeErrorListeners();
                 parser.addErrorListener(new BaseErrorListener() {

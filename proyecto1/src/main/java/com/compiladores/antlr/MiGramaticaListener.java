@@ -40,55 +40,25 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#clase}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#main}.
 	 * @param ctx the parse tree
 	 */
-	void enterClase(MiGramaticaParser.ClaseContext ctx);
+	void enterMain(MiGramaticaParser.MainContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#clase}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#main}.
 	 * @param ctx the parse tree
 	 */
-	void exitClase(MiGramaticaParser.ClaseContext ctx);
+	void exitMain(MiGramaticaParser.MainContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#cuerpoClase}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#funciones}.
 	 * @param ctx the parse tree
 	 */
-	void enterCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx);
+	void enterFunciones(MiGramaticaParser.FuncionesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#cuerpoClase}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#funciones}.
 	 * @param ctx the parse tree
 	 */
-	void exitCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#variables}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariables(MiGramaticaParser.VariablesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#variables}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariables(MiGramaticaParser.VariablesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#metodos}.
-	 * @param ctx the parse tree
-	 */
-	void enterMetodos(MiGramaticaParser.MetodosContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#metodos}.
-	 * @param ctx the parse tree
-	 */
-	void exitMetodos(MiGramaticaParser.MetodosContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#parametros}.
-	 * @param ctx the parse tree
-	 */
-	void enterParametros(MiGramaticaParser.ParametrosContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#parametros}.
-	 * @param ctx the parse tree
-	 */
-	void exitParametros(MiGramaticaParser.ParametrosContext ctx);
+	void exitFunciones(MiGramaticaParser.FuncionesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#parametro}.
 	 * @param ctx the parse tree
@@ -100,16 +70,6 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitParametro(MiGramaticaParser.ParametroContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#tipo}.
-	 * @param ctx the parse tree
-	 */
-	void enterTipo(MiGramaticaParser.TipoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#tipo}.
-	 * @param ctx the parse tree
-	 */
-	void exitTipo(MiGramaticaParser.TipoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#bloqueCodigo}.
 	 * @param ctx the parse tree
 	 */
@@ -120,35 +80,25 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#dentro}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#sentencia}.
 	 * @param ctx the parse tree
 	 */
-	void enterDentro(MiGramaticaParser.DentroContext ctx);
+	void enterSentencia(MiGramaticaParser.SentenciaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#dentro}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#sentencia}.
 	 * @param ctx the parse tree
 	 */
-	void exitDentro(MiGramaticaParser.DentroContext ctx);
+	void exitSentencia(MiGramaticaParser.SentenciaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#accesoArreglo}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#variables}.
 	 * @param ctx the parse tree
 	 */
-	void enterAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx);
+	void enterVariables(MiGramaticaParser.VariablesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#accesoArreglo}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#variables}.
 	 * @param ctx the parse tree
 	 */
-	void exitAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#asignacionSinPuntoYComa}.
-	 * @param ctx the parse tree
-	 */
-	void enterAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#asignacionSinPuntoYComa}.
-	 * @param ctx the parse tree
-	 */
-	void exitAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx);
+	void exitVariables(MiGramaticaParser.VariablesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#asignacion}.
 	 * @param ctx the parse tree
@@ -190,16 +140,6 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitCicloFor(MiGramaticaParser.CicloForContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#arreglo}.
-	 * @param ctx the parse tree
-	 */
-	void enterArreglo(MiGramaticaParser.ArregloContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#arreglo}.
-	 * @param ctx the parse tree
-	 */
-	void exitArreglo(MiGramaticaParser.ArregloContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#returnDentro}.
 	 * @param ctx the parse tree
 	 */
@@ -219,6 +159,16 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintDentro(MiGramaticaParser.PrintDentroContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#inputDentro}.
+	 * @param ctx the parse tree
+	 */
+	void enterInputDentro(MiGramaticaParser.InputDentroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#inputDentro}.
+	 * @param ctx the parse tree
+	 */
+	void exitInputDentro(MiGramaticaParser.InputDentroContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#expresiones}.
 	 * @param ctx the parse tree
@@ -240,15 +190,15 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitExpresionLogica(MiGramaticaParser.ExpresionLogicaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionIgualdad_diferencia}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionIgualdad}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx);
+	void enterExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionIgualdad_diferencia}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionIgualdad}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx);
+	void exitExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionRelacional}.
 	 * @param ctx the parse tree
@@ -260,25 +210,25 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitExpresionRelacional(MiGramaticaParser.ExpresionRelacionalContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionSum_Rest}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionSuma}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx);
+	void enterExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionSum_Rest}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionSuma}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx);
+	void exitExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionMult_Div}.
+	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionMult}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx);
+	void enterExpresionMult(MiGramaticaParser.ExpresionMultContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionMult_Div}.
+	 * Exit a parse tree produced by {@link MiGramaticaParser#expresionMult}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx);
+	void exitExpresionMult(MiGramaticaParser.ExpresionMultContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#expresionUnaria}.
 	 * @param ctx the parse tree
@@ -290,6 +240,16 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitExpresionUnaria(MiGramaticaParser.ExpresionUnariaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#llamadaFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void enterLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#llamadaFuncion}.
+	 * @param ctx the parse tree
+	 */
+	void exitLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#constantes}.
 	 * @param ctx the parse tree
 	 */
@@ -299,4 +259,14 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConstantes(MiGramaticaParser.ConstantesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void enterTipo(MiGramaticaParser.TipoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void exitTipo(MiGramaticaParser.TipoContext ctx);
 }

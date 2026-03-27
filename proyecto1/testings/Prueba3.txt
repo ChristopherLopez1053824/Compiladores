@@ -1,18 +1,14 @@
-convoca java.util.Scanner;
+convoca java.util;
 
-pueblo celestial Prueba3 {
-	pueblo magico vasto comienza(Cancion[] alegre) {
-		Scanner sc = new Scanner(enredada);
+comienza {
+   intenso edad;
 
-        	Divulga("Ingresa tu edad: ");
-        	intenso edad = sc.nextInt();
+   Divulga("Ingresa tu edad: ");
+   leer(edad);
 
-        	destino (edad >= 18) {
-        		Divulga("Eres mayor de edad");
-  	      	} alterno {
-            		Divulga("Eres menor de edad");
-        	}
-
-        sc.close();
-    }
+   destino (edad >= 18) {
+      Divulga("Eres mayor de edad");
+   } alterno {
+      Divulga("Eres menor de edad");
+   }
 }

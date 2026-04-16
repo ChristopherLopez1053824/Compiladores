@@ -38,8 +38,10 @@ public class App
                 }
 
                 CharStream input = CharStreams.fromFileName(ruta);
+                System.out.println("--------------------------------------------------------------------------------------------");
                 MiGramaticaLexer lexer = new MiGramaticaLexer(input);
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
+               
                 tokens.fill();
                 for (Token t : tokens.getTokens()) {
                         int tipo = t.getType();
@@ -73,6 +75,7 @@ public class App
                             System.out.println("Token: " + nombreToken + " -> " + t.getText());
                         }
                     }
+                System.out.println("--------------------------------------------------------------------------------------------");
                 tokens.seek(0);
                 MiGramaticaParser parser = new MiGramaticaParser(tokens);
                 parser.removeErrorListeners();
@@ -88,10 +91,11 @@ public class App
                         mensaje = mensaje.replace("missing", "falta");
                         mensaje = mensaje.replace("at", "en");
                         mensaje = mensaje.replace("mismatched input", "entrada inesperada");
+                        mensaje = mensaje.replace("mismenched input", "arreglo incorrecto");
                         mensaje = mensaje.replace("expecting", "se esperaba");
 
                         System.out.println("Error en línea " + line +", columna " + charPositionInLine);
-                        System.out.println("   " + mensaje);
+                        System.out.println(mensaje);
                     }
                 });
                 parser.programa();

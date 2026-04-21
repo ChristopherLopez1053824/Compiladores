@@ -112,6 +112,37 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
         return null;
     }
 
+  // -------- FUNCIONES INTERNAS --------
+    @Override
+    public Void visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) {
+
+        if (ctx.expresiones() != null) {
+            System.out.println("return " + ctx.expresiones().getText() + ";");
+        } else {
+            System.out.println("return;");
+        }
+
+        return null;
+    }
+
+    @Override
+    public Void visitPrintDentro(MiGramaticaParser.PrintDentroContext ctx) {
+
+        if (ctx.expresiones() != null) {
+            System.out.println("System.out.println(" + ctx.expresiones().getText() + ");");
+        } else {
+            System.out.println("System.out.println();");
+        }
+
+        return null;
+    }
+
+    @Override
+    public Void visitInputDentro(MiGramaticaParser.InputDentroContext ctx) {
+        System.out.println("// lectura no implementada directamente");
+        return null;
+    }
+
     // -------- BLOQUES --------
     @Override
     public Void visitBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx) {

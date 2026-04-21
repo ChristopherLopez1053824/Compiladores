@@ -75,6 +75,43 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
         return null;
     }
 
+    // -------- CONTROL --------
+    @Override
+    public Void visitCondicional(MiGramaticaParser.CondicionalContext ctx) {
+
+        System.out.println("if (" + ctx.expresiones().getText() + ")");
+        visit(ctx.bloqueCodigo(0));
+
+        if (ctx.ELSE() != null) {
+            System.out.println("else");
+            visit(ctx.bloqueCodigo(1));
+        }
+
+        return null;
+    }
+
+    @Override
+    public Void visitCicloWhile(MiGramaticaParser.CicloWhileContext ctx) {
+
+        System.out.println("while (" + ctx.expresiones().getText() + ")");
+        visit(ctx.bloqueCodigo());
+
+        return null;
+    }
+
+    @Override
+    public Void visitCicloFor(MiGramaticaParser.CicloForContext ctx) {
+
+        String init = ctx.getChild(2).getText();
+        String cond = ctx.expresiones(0) != null ? ctx.expresiones(0).getText() : "";
+        String update = ctx.expresiones(1) != null ? ctx.expresiones(1).getText() : "";
+
+        System.out.println("for (" + init + " " + cond + "; " + update + ")");
+        visit(ctx.bloqueCodigo());
+
+        return null;
+    }
+
     // -------- BLOQUES --------
     @Override
     public Void visitBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx) {

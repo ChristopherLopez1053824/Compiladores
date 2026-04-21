@@ -41,35 +41,14 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitClase(MiGramaticaParser.ClaseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMain(MiGramaticaParser.MainContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitVariables(MiGramaticaParser.VariablesContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitMetodos(MiGramaticaParser.MetodosContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitParametros(MiGramaticaParser.ParametrosContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunciones(MiGramaticaParser.FuncionesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -83,13 +62,6 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTipo(MiGramaticaParser.TipoContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -97,21 +69,14 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDentro(MiGramaticaParser.DentroContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSentencia(MiGramaticaParser.SentenciaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariables(MiGramaticaParser.VariablesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -146,13 +111,6 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArreglo(MiGramaticaParser.ArregloContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -161,6 +119,13 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitPrintDentro(MiGramaticaParser.PrintDentroContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitInputDentro(MiGramaticaParser.InputDentroContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -181,7 +146,7 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -195,14 +160,14 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresionMult(MiGramaticaParser.ExpresionMultContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -216,5 +181,19 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitConstantes(MiGramaticaParser.ConstantesContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitTipo(MiGramaticaParser.TipoContext ctx) { return visitChildren(ctx); }
 }

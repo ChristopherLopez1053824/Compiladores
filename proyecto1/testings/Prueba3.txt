@@ -4,7 +4,11 @@ comienza {
    intenso edad;
 
    Divulga("Ingresa tu edad: ");
+<<<<<<< HEAD
    escuchar(edad);
+=======
+   leer(edad);
+>>>>>>> origin/Christopher
 
    destino (edad >= 18) {
       Divulga("Eres mayor de edad");

@@ -1,5 +1,9 @@
 hechizo sumar(intenso a) {
+<<<<<<< HEAD
    felices a + 3;
+=======
+   felices a + b;
+>>>>>>> origin/Christopher
 }
 
 comienza {

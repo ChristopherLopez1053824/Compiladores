@@ -1,5 +1,5 @@
 hechizo sumar(intenso a) {
-   felices a + 3;
+   felices a + b;
 }
 
 comienza {

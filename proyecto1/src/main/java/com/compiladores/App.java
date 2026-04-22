@@ -14,6 +14,11 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import com.compiladores.antlr.MiGramaticaLexer;
 import com.compiladores.antlr.MiGramaticaParser;
 
+import org.antlr.v4.gui.TreeViewer;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.util.Arrays;
+
 public class App {
     public static void main(String[] args) {
         boolean errores = false;
@@ -110,6 +115,26 @@ public class App {
                 });
                 ParseTree tree = parser.programa();
                 if (errores == false) {
+                    System.out.println("Creacion de arbol:");
+                    System.out.println(tree.toStringTree(parser));
+
+                    JFrame frame = new JFrame("Arbol visual");
+                    JPanel panel = new JPanel();
+
+                    TreeViewer viewer = new TreeViewer
+                    (
+                        Arrays.asList(parser.getRuleNames()),
+                        tree
+                    );
+
+                    viewer.setScale(1.2);
+                    panel.add(viewer);
+
+                    frame.add(panel);
+                    frame.setSize(1000, 700);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.setVisible(true);
+
                     System.out.println(
                             "--------------------------------------------------------------------------------------------");
 

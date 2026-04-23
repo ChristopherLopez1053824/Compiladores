@@ -31,35 +31,17 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#clase}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#main}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitClase(MiGramaticaParser.ClaseContext ctx);
+	T visitMain(MiGramaticaParser.MainContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#cuerpoClase}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#funciones}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#variables}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariables(MiGramaticaParser.VariablesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#metodos}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMetodos(MiGramaticaParser.MetodosContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#parametros}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParametros(MiGramaticaParser.ParametrosContext ctx);
+	T visitFunciones(MiGramaticaParser.FuncionesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#parametro}.
 	 * @param ctx the parse tree
@@ -67,35 +49,23 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParametro(MiGramaticaParser.ParametroContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#tipo}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTipo(MiGramaticaParser.TipoContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#bloqueCodigo}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#dentro}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#sentencia}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDentro(MiGramaticaParser.DentroContext ctx);
+	T visitSentencia(MiGramaticaParser.SentenciaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#accesoArreglo}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#variables}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#asignacionSinPuntoYComa}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx);
+	T visitVariables(MiGramaticaParser.VariablesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#asignacion}.
 	 * @param ctx the parse tree
@@ -121,12 +91,6 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCicloFor(MiGramaticaParser.CicloForContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#arreglo}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArreglo(MiGramaticaParser.ArregloContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#returnDentro}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -138,6 +102,12 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPrintDentro(MiGramaticaParser.PrintDentroContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiGramaticaParser#inputDentro}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInputDentro(MiGramaticaParser.InputDentroContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#expresiones}.
 	 * @param ctx the parse tree
@@ -151,11 +121,11 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpresionLogica(MiGramaticaParser.ExpresionLogicaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionIgualdad_diferencia}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionIgualdad}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx);
+	T visitExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionRelacional}.
 	 * @param ctx the parse tree
@@ -163,17 +133,17 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpresionRelacional(MiGramaticaParser.ExpresionRelacionalContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionSum_Rest}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionSuma}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx);
+	T visitExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionMult_Div}.
+	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionMult}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx);
+	T visitExpresionMult(MiGramaticaParser.ExpresionMultContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#expresionUnaria}.
 	 * @param ctx the parse tree
@@ -181,9 +151,21 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpresionUnaria(MiGramaticaParser.ExpresionUnariaContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiGramaticaParser#llamadaFuncion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#constantes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConstantes(MiGramaticaParser.ConstantesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiGramaticaParser#tipo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTipo(MiGramaticaParser.TipoContext ctx);
 }

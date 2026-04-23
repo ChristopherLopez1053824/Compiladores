@@ -1,11 +1,19 @@
 grammar MiGramatica;
+
 @header {
 package com.compiladores.antlr;
 }
 
+<<<<<<< HEAD
 // PARSER
 programa
     : importacion* clase+ EOF
+=======
+// -------- PROGRAMA --------
+
+programa
+    : importacion* funciones* main EOF
+>>>>>>> origin/Nicky
     ;
 
 importacion
@@ -13,63 +21,45 @@ importacion
     ;
 
 nombreCompleto
+<<<<<<< HEAD
     : ID (PUNTO ID)*
+=======
+    : ID ('.' ID)*
+>>>>>>> origin/Nicky
     ;
 
-clase
-    : CLASS ID LLAVE_A cuerpoClase LLAVE_C
+main
+    : MAIN bloqueCodigo
     ;
 
-cuerpoClase
-    : (variables | metodos)*
-    ;
+// -------- FUNCIONES --------
 
-variables
-    : tipo ID (IGUAL expresiones)? PUNTO_Y_COMA
-    ;
-
-metodos
-    : PUBLIC (STATIC)? tipo ID
-      PARENTESIS_A parametros? PARENTESIS_C
-      bloqueCodigo
-    ;
-
-parametros
-    : parametro (COMA parametro)*
+funciones
+    : HECHIZO tipo ID PARENTESIS_A parametro? PARENTESIS_C bloqueCodigo
     ;
 
 parametro
     : tipo ID
     ;
 
-tipo
-    : INT
-    | FLOAT
-    | DOUBLE
-    | LONG
-    | SHORT
-    | BYTE
-    | CHAR
-    | BOOLEAN
-    | STRING
-    | VOID
-    ;
+// -------- BLOQUES --------
 
 bloqueCodigo
-    : LLAVE_A dentro* LLAVE_C
+    : LLAVE_A sentencia* LLAVE_C
     ;
 
-dentro
-    : bloqueCodigo
-    | variables
+sentencia
+    : variables
     | asignacion
     | condicional
     | cicloWhile
     | cicloFor
     | returnDentro
     | printDentro
+    | inputDentro
     ;
 
+<<<<<<< HEAD
 accesoArreglo
     : ID CORCHETE_A expresiones CORCHETE_C
     ;
@@ -78,17 +68,27 @@ asignacionSinPuntoYComa
     : (ID | accesoArreglo) IGUAL expresiones
     ;
 
+=======
+// -------- VARIABLES --------
+
+variables
+    : tipo ID (IGUAL expresiones)? PUNTO_Y_COMA
+    ;
+
+>>>>>>> origin/Nicky
 asignacion
     : ID IGUAL expresiones PUNTO_Y_COMA
     ;
 
+// -------- CONTROL --------
+
 condicional
-    : IF PARENTESIS_A expresiones PARENTESIS_C dentro
-      (ELSE dentro)?
+    : IF PARENTESIS_A expresiones PARENTESIS_C bloqueCodigo
+      (ELSE bloqueCodigo)?
     ;
 
 cicloWhile
-    : WHILE PARENTESIS_A expresiones PARENTESIS_C dentro
+    : WHILE PARENTESIS_A expresiones PARENTESIS_C bloqueCodigo
     ;
 
 cicloFor
@@ -97,12 +97,16 @@ cicloFor
       expresiones? PUNTO_Y_COMA
       expresiones?
       PARENTESIS_C
-      dentro
+      bloqueCodigo
     ;
 
+<<<<<<< HEAD
 arreglo
     : LLAVE_A expresiones (COMA expresiones)* LLAVE_C
     ;
+=======
+// -------- FUNCIONES INTERNAS --------
+>>>>>>> origin/Nicky
 
 returnDentro
     : RETURN expresiones? PUNTO_Y_COMA
@@ -112,7 +116,13 @@ printDentro
     : SYSTEM_OUT_PRINTLN PARENTESIS_A expresiones? PARENTESIS_C PUNTO_Y_COMA
     ;
 
+<<<<<<< HEAD
 
+=======
+inputDentro
+    : LEER PARENTESIS_A ID PARENTESIS_C PUNTO_Y_COMA
+    ;
+>>>>>>> origin/Nicky
 
 // -------- EXPRESIONES --------
 
@@ -121,32 +131,42 @@ expresiones
     ;
 
 expresionLogica
-    : expresionIgualdad_diferencia (OPERADORES_LOGICOS expresionIgualdad_diferencia)*
+    : expresionIgualdad (OPERADORES_LOGICOS expresionIgualdad)*
     ;
 
-expresionIgualdad_diferencia
+expresionIgualdad
     : expresionRelacional ((IGUALDAD | DIFERENCIA) expresionRelacional)*
     ;
 
 expresionRelacional
-    : expresionSum_Rest (MAYOR_MENOR_IGUALQUE expresionSum_Rest)*
+    : expresionSuma (MAYOR_MENOR_IGUALQUE expresionSuma)*
     ;
 
-expresionSum_Rest
-    : expresionMult_Div ((SUMA | RESTA) expresionMult_Div)*
+expresionSuma
+    : expresionMult ((SUMA | RESTA) expresionMult)*
     ;
 
-expresionMult_Div
+expresionMult
     : expresionUnaria ((MULTIPLICACION | DIVISION) expresionUnaria)*
     ;
 
 expresionUnaria
     : PARENTESIS_A expresiones PARENTESIS_C
     | constantes
-    | accesoArreglo
+    | llamadaFuncion
     | ID
     ;
+<<<<<<< HEAD
     
+=======
+
+llamadaFuncion
+    : ID PARENTESIS_A expresiones? PARENTESIS_C
+    ;
+
+// -------- CONSTANTES --------
+
+>>>>>>> origin/Nicky
 constantes
     : INT_CONSTANTE
     | FLOAT_CONSTANTE
@@ -155,6 +175,7 @@ constantes
     | BOOLEAN_CONSTANTE
     ;
 
+<<<<<<< HEAD
 
 
 // ----------- LEXER ---------------
@@ -168,74 +189,76 @@ STATIC    : 'magico';
 VOID      : 'vasto';
 ARGS      : 'alegre';
 NEW       : 'despertar';
+=======
+// -------- TIPOS --------
+
+tipo
+    : INT
+    | FLOAT
+    | DOUBLE
+    | CHAR
+    | BOOLEAN
+    | STRING
+    | VOID
+    ;
+
+// -------- LEXER --------
+
+// PALABRAS RESERVADAS
+>>>>>>> origin/Nicky
 MAIN      : 'comienza';
+HECHIZO   : 'hechizo';
 
 INT       : 'intenso';
 FLOAT     : 'fenix';
 DOUBLE    : 'dorado';
-LONG      : 'dragon';
-SHORT     : 'sapo';
-BYTE      : 'boo';
 CHAR      : 'chispa';
 BOOLEAN   : 'bondad';
 STRING    : 'Cancion';
-NULL      : 'invisible';
+VOID      : 'vasto';
 
 IF        : 'destino';
 ELSE      : 'alterno';
-DO        : 'domina';
 WHILE     : 'guardian';
 FOR       : 'viaje';
 RETURN    : 'felices';
-SWITCH    : 'hechizos';
-CASE      : 'capitulo';
-SYSTEM_OUT_PRINTLN    : 'Divulga';
-SYSTEM_IN : 'enredada';
 
+<<<<<<< HEAD
+=======
+SYSTEM_OUT_PRINTLN : 'Divulga';
+LEER      : 'leer';
+>>>>>>> origin/Nicky
 
-// ---- CONSTANTES ----
-INT_CONSTANTE
-    : [0-9]+;
+// CONSTANTES
+INT_CONSTANTE : [0-9]+;
+FLOAT_CONSTANTE : [0-9]+ '.' [0-9]+;
+CHAR_CONSTANTE : '\'' . '\'';
+STRING_CONSTANTE : '"' (~["\r\n])* '"';
+BOOLEAN_CONSTANTE : 'true' | 'false';
 
-FLOAT_CONSTANTE
-    : [0-9]+ '.' [0-9]+;
+// IDENTIFICADORES
+ID : [a-zA-Z_][a-zA-Z_0-9]*;
 
-CHAR_CONSTANTE
-    : '\'' . '\'';
+// OPERADORES
+IGUAL : '=';
+SUMA : '+';
+RESTA : '-';
+MULTIPLICACION : '*';
+DIVISION : '/';
+IGUALDAD : '==';
+DIFERENCIA : '!=';
+MAYOR_MENOR_IGUALQUE : '<' | '<=' | '>' | '>=';
+OPERADORES_LOGICOS : '&&' | '||';
 
-STRING_CONSTANTE
-    : '"' (~["\r\n])* '"';
-
-BOOLEAN_CONSTANTE
-    : 'true' | 'false';
-
-// ---- IDENTIFICADORES ----
-ID
-    : [a-zA-Z_][a-zA-Z_0-9]*;
-
-// ---- OPERADORES ----
-IGUAL         : '=';
-SUMA   : '+';
-RESTA     : '-';
-MULTIPLICACION     : '*';
-DIVISION     : '/';
-IGUALDAD       : '==';
-DIFERENCIA     : '!=';
-MAYOR_MENOR_IGUALQUE     : '<' | '<=' | '>' | '>=';
-OPERADORES_LOGICOS   : '&&' | '||';
-
-// ---- SÍMBOLOS ----
+// SÍMBOLOS
 PUNTO_Y_COMA : ';';
-COMA         : ',';
+COMA : ',';
 PARENTESIS_A : '(';
 PARENTESIS_C : ')';
-LLAVE_A      : '{';
-LLAVE_C      : '}';
-CORCHETE_A      : '[';
-CORCHETE_C      : ']';
-ESPECIALES      : '$' | '#' | '@' | '%' | '?' | '¿';
+LLAVE_A : '{';
+LLAVE_C : '}';
 
-// ---- ESPACIOS Y COMENTARIOS ----
+// ESPACIOS
 WS : [ \t\r\n]+ -> skip;
 
 LINE_COMMENT
@@ -248,24 +271,19 @@ BLOCK_COMMENT
 
 UNCLOSED_COMMENT
     : '/*' .*? EOF
-      { System.out.println("Error: comentario sin cerrar en línea "); }
     ;
     
 INVALID_FLOAT
     : [0-9]+ '.' 
-      { System.out.println("Error: número decimal mal formado en línea "); }
     ;
 INVALID_ID
     : [0-9]+ [a-zA-Z_]+
-      { System.out.println("Error: identificador inválido en línea "); }
     ;
 UNCLOSED_CHAR
 : '\'' .*
-    { System.out.println("Error: carácter mal formado en línea "); }
 ;
 UNCLOSED_STRING
     : '"' (~["\r\n])*
-      { System.out.println("Error: cadena sin cerrar en línea "); }
     ;
 
 ERROR_CHAR

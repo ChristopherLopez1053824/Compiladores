@@ -55,61 +55,25 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClase(MiGramaticaParser.ClaseContext ctx) { }
+	@Override public void enterMain(MiGramaticaParser.MainContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClase(MiGramaticaParser.ClaseContext ctx) { }
+	@Override public void exitMain(MiGramaticaParser.MainContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx) { }
+	@Override public void enterFunciones(MiGramaticaParser.FuncionesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCuerpoClase(MiGramaticaParser.CuerpoClaseContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariables(MiGramaticaParser.VariablesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariables(MiGramaticaParser.VariablesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMetodos(MiGramaticaParser.MetodosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMetodos(MiGramaticaParser.MetodosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParametros(MiGramaticaParser.ParametrosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParametros(MiGramaticaParser.ParametrosContext ctx) { }
+	@Override public void exitFunciones(MiGramaticaParser.FuncionesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -127,18 +91,6 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTipo(MiGramaticaParser.TipoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTipo(MiGramaticaParser.TipoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBloqueCodigo(MiGramaticaParser.BloqueCodigoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -151,37 +103,25 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDentro(MiGramaticaParser.DentroContext ctx) { }
+	@Override public void enterSentencia(MiGramaticaParser.SentenciaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDentro(MiGramaticaParser.DentroContext ctx) { }
+	@Override public void exitSentencia(MiGramaticaParser.SentenciaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx) { }
+	@Override public void enterVariables(MiGramaticaParser.VariablesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAccesoArreglo(MiGramaticaParser.AccesoArregloContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAsignacionSinPuntoYComa(MiGramaticaParser.AsignacionSinPuntoYComaContext ctx) { }
+	@Override public void exitVariables(MiGramaticaParser.VariablesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -235,18 +175,6 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArreglo(MiGramaticaParser.ArregloContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArreglo(MiGramaticaParser.ArregloContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -266,6 +194,18 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPrintDentro(MiGramaticaParser.PrintDentroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInputDentro(MiGramaticaParser.InputDentroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInputDentro(MiGramaticaParser.InputDentroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -295,13 +235,13 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx) { }
+	@Override public void enterExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpresionIgualdad_diferencia(MiGramaticaParser.ExpresionIgualdad_diferenciaContext ctx) { }
+	@Override public void exitExpresionIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -319,25 +259,25 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx) { }
+	@Override public void enterExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpresionSum_Rest(MiGramaticaParser.ExpresionSum_RestContext ctx) { }
+	@Override public void exitExpresionSuma(MiGramaticaParser.ExpresionSumaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx) { }
+	@Override public void enterExpresionMult(MiGramaticaParser.ExpresionMultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpresionMult_Div(MiGramaticaParser.ExpresionMult_DivContext ctx) { }
+	@Override public void exitExpresionMult(MiGramaticaParser.ExpresionMultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -355,6 +295,18 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConstantes(MiGramaticaParser.ConstantesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -362,6 +314,18 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConstantes(MiGramaticaParser.ConstantesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTipo(MiGramaticaParser.TipoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTipo(MiGramaticaParser.TipoContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

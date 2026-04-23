@@ -1,8 +1,6 @@
-pueblo celestial Prueba2 {
-	pueblo magico vasto comienza(Cancion[] alegre) {
-		intenso x = 5;
-		intenso y = 5;
+comienza {
+   intenso x = 5;
+   intenso y = 5;
 
-		Divulga(x + y);
-	}
+   Divulga(x + y);
 }

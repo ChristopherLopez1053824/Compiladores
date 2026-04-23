@@ -1,13 +1,12 @@
-pueblo celestial Prueba4 {
+hechizo sumar(intenso a) {
+<<<<<<< HEAD
+   felices a + 3;
+=======
+   felices a + b;
+>>>>>>> origin/Christopher
+}
 
-    pueblo magico intenso sumar(intenso a, intenso b) {
-        felices a + b;
-    }
-
-    pueblo magico vasto comienza(Cancion[] alegre) {
-
-        intenso resultado = sumar(5, 3);
-        Divulga("La suma es: " + resultado);
-
-    }
+comienza {
+   intenso resultado = sumar(5);
+   Divulga("La suma es: " + resultado);
 }

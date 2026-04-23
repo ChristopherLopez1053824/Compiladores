@@ -1,9 +1,5 @@
-hechizo sumar(intenso a) {
-<<<<<<< HEAD
-   felices a + 3;
-=======
+hechizo intenso sumar(intenso a, intenso b) {
    felices a + b;
->>>>>>> origin/Christopher
 }
 
 comienza {

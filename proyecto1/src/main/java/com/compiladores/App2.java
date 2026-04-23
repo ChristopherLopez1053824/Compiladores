@@ -21,24 +21,22 @@ import java.util.Arrays;
 
 public class App2 {
     public static void main(String[] args) {
-        boolean errores = false;
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
 
         while (continuar) {
+        final boolean[] errores = {false};
             try {
-                String ruta = TxtManager.seleccionarArchivoTxt();
-                if (ruta == null) {
+                String ruta = null;
                     if (ruta == null) {
                         System.out.println("\n¿Desea analizar un documento? (si/no)");
                         String respuesta = scanner.nextLine();
                         if (!respuesta.equalsIgnoreCase("si")) {
                             break;
                         }
-                        continue;
                     }
-                }
 
+                ruta = TxtManager.seleccionarArchivoTxt();
                 CharStream input = CharStreams.fromFileName(ruta);
                 System.out.println(
                         "--------------------------------------------------------------------------------------------");
@@ -51,37 +49,37 @@ public class App2 {
 
                     if (tipo == MiGramaticaLexer.UNCLOSED_COMMENT) {
                         System.out.println("Error léxico en línea " + t.getLine() + ": comentario sin cerrar");
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else if (tipo == MiGramaticaLexer.INVALID_FLOAT) {
                         System.out.println("Error léxico en línea " + t.getLine() + ": número decimal mal formado -> "
                                 + t.getText());
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else if (tipo == MiGramaticaLexer.INVALID_ID) {
                         System.out.println(
                                 "Error léxico en línea " + t.getLine() + ": identificador inválido -> " + t.getText());
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else if (tipo == MiGramaticaLexer.UNCLOSED_CHAR) {
                         System.out.println(
                                 "Error léxico en línea " + t.getLine() + ": carácter sin cerrar -> " + t.getText());
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else if (tipo == MiGramaticaLexer.UNCLOSED_STRING) {
                         System.out.println(
                                 "Error léxico en línea " + t.getLine() + ": cadena sin cerrar -> " + t.getText());
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else if (tipo == MiGramaticaLexer.ERROR_CHAR) {
                         System.out.println(
                                 "Error léxico en línea " + t.getLine() + ": carácter inválido -> " + t.getText());
-                        errores = true;
+                        errores[0] = true;
                     }
 
                     else {
@@ -103,6 +101,7 @@ public class App2 {
                             RecognitionException e) {
 
                         String mensaje = msg;
+                        errores[0] = true;
                         mensaje = mensaje.replace("missing", "falta");
                         mensaje = mensaje.replace("at", "en");
                         mensaje = mensaje.replace("mismatched input", "entrada inesperada");
@@ -114,7 +113,7 @@ public class App2 {
                     }
                 });
                 ParseTree tree = parser.programa();
-                if (errores == false) {
+                if (errores[0] == false) {
                     System.out.println("Creacion de arbol:");
                     System.out.println(tree.toStringTree(parser));
 
@@ -150,10 +149,10 @@ public class App2 {
                 System.out.println("Error durante el análisis:");
                 e.printStackTrace();
 
-                System.out.println("Muchas gracias por usar el analizador.");
-                scanner.close();
+                
             }
 
         }
+        System.out.println("Muchas gracias por usar el analizador.");
     }
 }

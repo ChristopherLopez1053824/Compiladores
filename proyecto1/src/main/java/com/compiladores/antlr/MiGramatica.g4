@@ -155,6 +155,7 @@ tipo
 // -------- LEXER --------
 
 // PALABRAS RESERVADAS
+CONVOCA : 'convoca';
 MAIN      : 'comienza';
 HECHIZO   : 'hechizo';
 
@@ -173,7 +174,7 @@ FOR       : 'viaje';
 RETURN    : 'felices';
 
 SYSTEM_OUT_PRINTLN : 'Divulga';
-LEER      : 'leer';
+LEER      : 'escuchar';
 
 // CONSTANTES
 INT_CONSTANTE : [0-9]+;

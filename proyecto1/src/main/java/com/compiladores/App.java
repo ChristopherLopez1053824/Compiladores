@@ -1,7 +1,12 @@
 package com.compiladores;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -14,12 +19,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import com.compiladores.antlr.MiGramaticaLexer;
 import com.compiladores.antlr.MiGramaticaParser;
 
-import org.antlr.v4.gui.TreeViewer;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.util.Arrays;
-
-public class App2 {
+public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;

@@ -41,9 +41,17 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
         System.out.print("public static " + tipo + " " + nombre + "(");
 
         if (ctx.parametro() != null) {
-            String tipoParam = traducirTipo(ctx.parametro().tipo().getText());
-            String idParam = ctx.parametro().ID().getText();
-            System.out.print(tipoParam + " " + idParam);
+            for (int i = 0; i < ctx.parametro().size(); i++) {
+                var p = ctx.parametro(i);
+                String tipoParam = traducirTipo(p.tipo().getText());
+                String idParam = p.ID().getText();
+
+                System.out.print(tipoParam + " " + idParam);
+
+                if (i < ctx.parametro().size() - 1) {
+                    System.out.print(", ");
+                }
+            }
         }
 
         System.out.println(")");
@@ -112,7 +120,7 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
         return null;
     }
 
-  // -------- FUNCIONES INTERNAS --------
+    // -------- FUNCIONES INTERNAS --------
     @Override
     public Void visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) {
 
@@ -158,15 +166,22 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
 
     private String traducirTipo(String tipo) {
         switch (tipo) {
-            case "intenso": return "int";
-            case "fenix": return "float";
-            case "dorado": return "double";
-            case "chispa": return "char";
-            case "bondad": return "boolean";
-            case "Cancion": return "String";
-            case "vasto": return "void";
+            case "intenso":
+                return "int";
+            case "fenix":
+                return "float";
+            case "dorado":
+                return "double";
+            case "chispa":
+                return "char";
+            case "bondad":
+                return "boolean";
+            case "Cancion":
+                return "String";
+            case "vasto":
+                return "void";
         }
         return tipo;
     }
-    
-}         
+
+}

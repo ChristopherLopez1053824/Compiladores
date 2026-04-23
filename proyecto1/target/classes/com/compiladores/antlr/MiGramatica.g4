@@ -4,16 +4,10 @@ grammar MiGramatica;
 package com.compiladores.antlr;
 }
 
-<<<<<<< HEAD
-// PARSER
-programa
-    : importacion* clase+ EOF
-=======
 // -------- PROGRAMA --------
 
 programa
     : importacion* funciones* main EOF
->>>>>>> origin/Nicky
     ;
 
 importacion
@@ -21,11 +15,7 @@ importacion
     ;
 
 nombreCompleto
-<<<<<<< HEAD
-    : ID (PUNTO ID)*
-=======
     : ID ('.' ID)*
->>>>>>> origin/Nicky
     ;
 
 main
@@ -35,7 +25,7 @@ main
 // -------- FUNCIONES --------
 
 funciones
-    : HECHIZO tipo ID PARENTESIS_A parametro? PARENTESIS_C bloqueCodigo
+    : HECHIZO tipo ID PARENTESIS_A parametro (COMA parametro)* PARENTESIS_C bloqueCodigo
     ;
 
 parametro
@@ -59,23 +49,12 @@ sentencia
     | inputDentro
     ;
 
-<<<<<<< HEAD
-accesoArreglo
-    : ID CORCHETE_A expresiones CORCHETE_C
-    ;
-
-asignacionSinPuntoYComa
-    : (ID | accesoArreglo) IGUAL expresiones
-    ;
-
-=======
 // -------- VARIABLES --------
 
 variables
     : tipo ID (IGUAL expresiones)? PUNTO_Y_COMA
     ;
 
->>>>>>> origin/Nicky
 asignacion
     : ID IGUAL expresiones PUNTO_Y_COMA
     ;
@@ -100,13 +79,7 @@ cicloFor
       bloqueCodigo
     ;
 
-<<<<<<< HEAD
-arreglo
-    : LLAVE_A expresiones (COMA expresiones)* LLAVE_C
-    ;
-=======
 // -------- FUNCIONES INTERNAS --------
->>>>>>> origin/Nicky
 
 returnDentro
     : RETURN expresiones? PUNTO_Y_COMA
@@ -116,13 +89,9 @@ printDentro
     : SYSTEM_OUT_PRINTLN PARENTESIS_A expresiones? PARENTESIS_C PUNTO_Y_COMA
     ;
 
-<<<<<<< HEAD
-
-=======
 inputDentro
     : LEER PARENTESIS_A ID PARENTESIS_C PUNTO_Y_COMA
     ;
->>>>>>> origin/Nicky
 
 // -------- EXPRESIONES --------
 
@@ -156,9 +125,6 @@ expresionUnaria
     | llamadaFuncion
     | ID
     ;
-<<<<<<< HEAD
-    
-=======
 
 llamadaFuncion
     : ID PARENTESIS_A expresiones? PARENTESIS_C
@@ -166,7 +132,6 @@ llamadaFuncion
 
 // -------- CONSTANTES --------
 
->>>>>>> origin/Nicky
 constantes
     : INT_CONSTANTE
     | FLOAT_CONSTANTE
@@ -175,21 +140,6 @@ constantes
     | BOOLEAN_CONSTANTE
     ;
 
-<<<<<<< HEAD
-
-
-// ----------- LEXER ---------------
-
-// ---- PALABRAS RESERVADAS ----
-CONVOCA : 'convoca';
-PUNTO : '.';
-CLASS     : 'celestial';
-PUBLIC    : 'pueblo';
-STATIC    : 'magico';
-VOID      : 'vasto';
-ARGS      : 'alegre';
-NEW       : 'despertar';
-=======
 // -------- TIPOS --------
 
 tipo
@@ -205,7 +155,7 @@ tipo
 // -------- LEXER --------
 
 // PALABRAS RESERVADAS
->>>>>>> origin/Nicky
+CONVOCA : 'convoca';
 MAIN      : 'comienza';
 HECHIZO   : 'hechizo';
 
@@ -223,11 +173,8 @@ WHILE     : 'guardian';
 FOR       : 'viaje';
 RETURN    : 'felices';
 
-<<<<<<< HEAD
-=======
 SYSTEM_OUT_PRINTLN : 'Divulga';
-LEER      : 'leer';
->>>>>>> origin/Nicky
+LEER      : 'escuchar';
 
 // CONSTANTES
 INT_CONSTANTE : [0-9]+;

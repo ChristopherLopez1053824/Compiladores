@@ -26,19 +26,18 @@ public class App {
         boolean continuar = true;
 
         while (continuar) {
+            
             try {
-                String ruta = TxtManager.seleccionarArchivoTxt();
-                if (ruta == null) {
+                String ruta = null;
                     if (ruta == null) {
                         System.out.println("\n¿Desea analizar un documento? (si/no)");
                         String respuesta = scanner.nextLine();
                         if (!respuesta.equalsIgnoreCase("si")) {
                             break;
                         }
-                        continue;
                     }
-                }
 
+                ruta = TxtManager.seleccionarArchivoTxt();
                 CharStream input = CharStreams.fromFileName(ruta);
                 System.out.println(
                         "--------------------------------------------------------------------------------------------");
@@ -150,10 +149,11 @@ public class App {
                 System.out.println("Error durante el análisis:");
                 e.printStackTrace();
 
-                System.out.println("Muchas gracias por usar el analizador.");
-                scanner.close();
+                
             }
 
         }
+        System.out.println("Muchas gracias por usar el analizador.");
+        scanner.close();
     }
 }

@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Arrays;
 
-public class App {
+public class App2 {
     public static void main(String[] args) {
         boolean errores = false;
         Scanner scanner = new Scanner(System.in);

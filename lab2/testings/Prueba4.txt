@@ -1,0 +1,12 @@
+hechizo sumar(intenso a) {
+<<<<<<< HEAD
+   felices a + 3;
+=======
+   felices a + b;
+>>>>>>> origin/Christopher
+}
+
+comienza {
+   intenso resultado = sumar(5);
+   Divulga("La suma es: " + resultado);
+}

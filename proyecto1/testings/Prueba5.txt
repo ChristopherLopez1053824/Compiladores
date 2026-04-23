@@ -6,7 +6,7 @@ comienza {
 
    guardian (numero != 5) {
       Divulga("Escribe el numero 5 para salir: ");
-      leer(numero);
+      escuchar(numero);
    }
 
    Divulga("Programa terminado");

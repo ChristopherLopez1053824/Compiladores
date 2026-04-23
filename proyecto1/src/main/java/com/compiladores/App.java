@@ -21,12 +21,11 @@ import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
-        final boolean[] errores = {false};
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
 
         while (continuar) {
-            
+        final boolean[] errores = {false};
             try {
                 String ruta = null;
                     if (ruta == null) {
@@ -102,10 +101,7 @@ public class App {
                             RecognitionException e) {
 
                         String mensaje = msg;
-                        if(mensaje != null)
-                        {
-                            errores[0] = true;;
-                        }
+                        errores[0] = true;
                         mensaje = mensaje.replace("missing", "falta");
                         mensaje = mensaje.replace("at", "en");
                         mensaje = mensaje.replace("mismatched input", "entrada inesperada");
@@ -158,6 +154,5 @@ public class App {
 
         }
         System.out.println("Muchas gracias por usar el analizador.");
-        scanner.close();
     }
 }

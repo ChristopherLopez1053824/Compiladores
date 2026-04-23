@@ -1,6 +1,0 @@
-comienza {
-   intenso x = 5;
-   intenso y = 5;
-
-   Divulga(x + y);
-}

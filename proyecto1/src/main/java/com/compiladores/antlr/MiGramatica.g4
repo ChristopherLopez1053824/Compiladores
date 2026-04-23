@@ -25,7 +25,7 @@ main
 // -------- FUNCIONES --------
 
 funciones
-    : HECHIZO tipo ID PARENTESIS_A parametro? PARENTESIS_C bloqueCodigo
+    : HECHIZO tipo ID PARENTESIS_A parametro (COMA parametro)* PARENTESIS_C bloqueCodigo
     ;
 
 parametro

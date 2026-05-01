@@ -1,7 +1,7 @@
 convoca java.util;
 
 comienza {
-   intenso edad
+   intenso edad 
 
    Divulga("Hola");
 }

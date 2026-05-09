@@ -1,4 +1,4 @@
-// Generated from MiGramatica.g4 by ANTLR 4.13.1
+// Generated from c:/Users/juanp/OneDrive/Documentos/Proyecto1 - Compiladores/Compiladores/proyecto1/src/main/java/com/compiladores/antlr/MiGramatica.g4 by ANTLR 4.13.1
 
 package com.compiladores.antlr;
 
@@ -144,19 +144,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_programa; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterPrograma(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitPrograma(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitPrograma(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProgramaContext programa() throws RecognitionException {
@@ -222,19 +209,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_importacion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterImportacion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitImportacion(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitImportacion(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ImportacionContext importacion() throws RecognitionException {
@@ -272,19 +246,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_nombreCompleto; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterNombreCompleto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitNombreCompleto(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitNombreCompleto(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final NombreCompletoContext nombreCompleto() throws RecognitionException {
@@ -335,19 +296,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_main; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterMain(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitMain(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitMain(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final MainContext main() throws RecognitionException {
@@ -399,19 +347,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funciones; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterFunciones(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitFunciones(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitFunciones(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncionesContext funciones() throws RecognitionException {
@@ -474,19 +409,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parametro; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterParametro(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitParametro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitParametro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParametroContext parametro() throws RecognitionException {
@@ -526,19 +448,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bloqueCodigo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterBloqueCodigo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitBloqueCodigo(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitBloqueCodigo(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BloqueCodigoContext bloqueCodigo() throws RecognitionException {
@@ -609,19 +518,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sentencia; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterSentencia(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitSentencia(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitSentencia(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SentenciaContext sentencia() throws RecognitionException {
@@ -723,19 +619,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_variables; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterVariables(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitVariables(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitVariables(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VariablesContext variables() throws RecognitionException {
@@ -788,19 +671,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_asignacion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterAsignacion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitAsignacion(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitAsignacion(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AsignacionContext asignacion() throws RecognitionException {
@@ -849,19 +719,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_condicional; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterCondicional(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitCondicional(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitCondicional(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CondicionalContext condicional() throws RecognitionException {
@@ -921,19 +778,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cicloWhile; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterCicloWhile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitCicloWhile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitCicloWhile(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CicloWhileContext cicloWhile() throws RecognitionException {
@@ -993,19 +837,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cicloFor; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterCicloFor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitCicloFor(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitCicloFor(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CicloForContext cicloFor() throws RecognitionException {
@@ -1099,19 +930,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_returnDentro; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterReturnDentro(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitReturnDentro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitReturnDentro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ReturnDentroContext returnDentro() throws RecognitionException {
@@ -1161,19 +979,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_printDentro; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterPrintDentro(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitPrintDentro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitPrintDentro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PrintDentroContext printDentro() throws RecognitionException {
@@ -1225,19 +1030,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inputDentro; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterInputDentro(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitInputDentro(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitInputDentro(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final InputDentroContext inputDentro() throws RecognitionException {
@@ -1278,19 +1070,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresiones; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresiones(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresiones(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresiones(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionesContext expresiones() throws RecognitionException {
@@ -1330,19 +1109,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionLogica; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionLogica(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionLogica(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionLogica(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionLogicaContext expresionLogica() throws RecognitionException {
@@ -1403,19 +1169,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionIgualdad; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionIgualdad(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionIgualdad(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionIgualdad(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionIgualdadContext expresionIgualdad() throws RecognitionException {
@@ -1480,19 +1233,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionRelacional; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionRelacional(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionRelacional(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionRelacional(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionRelacionalContext expresionRelacional() throws RecognitionException {
@@ -1553,19 +1293,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionSuma; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionSuma(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionSuma(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionSuma(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionSumaContext expresionSuma() throws RecognitionException {
@@ -1634,19 +1361,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionMult; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionMult(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionMult(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionMult(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionMultContext expresionMult() throws RecognitionException {
@@ -1713,19 +1427,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresionUnaria; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterExpresionUnaria(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitExpresionUnaria(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitExpresionUnaria(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpresionUnariaContext expresionUnaria() throws RecognitionException {
@@ -1799,19 +1500,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_llamadaFuncion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterLlamadaFuncion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitLlamadaFuncion(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitLlamadaFuncion(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final LlamadaFuncionContext llamadaFuncion() throws RecognitionException {
@@ -1877,19 +1565,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constantes; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterConstantes(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitConstantes(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitConstantes(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstantesContext constantes() throws RecognitionException {
@@ -1935,19 +1610,6 @@ public class MiGramaticaParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tipo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).enterTipo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiGramaticaListener ) ((MiGramaticaListener)listener).exitTipo(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiGramaticaVisitor ) return ((MiGramaticaVisitor<? extends T>)visitor).visitTipo(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TipoContext tipo() throws RecognitionException {

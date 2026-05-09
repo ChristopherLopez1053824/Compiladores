@@ -1,0 +1,6 @@
+comienza {
+
+    intenso a = 10;
+    intenso a = 20;
+
+}

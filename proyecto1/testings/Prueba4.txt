@@ -3,6 +3,7 @@ hechizo intenso sumar(intenso a, intenso b) {
 }
 
 comienza {
-   intenso resultado = sumar(5);
-   Divulga("La suma es: " + resultado);
+
+   intenso resultado = sumar(5, 5);
+
 }

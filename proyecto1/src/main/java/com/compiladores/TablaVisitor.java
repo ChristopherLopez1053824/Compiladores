@@ -192,6 +192,11 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
             return "intenso";
         }
 
+        // Float
+        if (texto.matches("[0-9]+\\.[0-9]+")) {
+            return "fenix";
+        }
+
         // Strings
         if (texto.startsWith("\"") && texto.endsWith("\"")) {
             return "Cancion";
@@ -259,17 +264,28 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
     for (int i = 0; i < parametrosRecibidos; i++) {
 
         String tipoEsperado = tiposEsperados.get(i);
-
         String tipoRecibido = obtenerTipo(ctx.expresiones(i));
+        boolean compatibles = false;
 
-        if (!tipoEsperado.equals(tipoRecibido)) {
+        // mismos tipos
+    if (tipoEsperado.equals(tipoRecibido)) {
+        compatibles = true;
+    }
 
-            error = true;
+    // compatibilidad numérica
+    else if ((tipoEsperado.equals("intenso") || tipoEsperado.equals("fenix") || tipoEsperado.equals("dorado"))
+        && (tipoRecibido.equals("intenso") || tipoRecibido.equals("fenix") || tipoRecibido.equals("dorado")))
+    {
+        compatibles = true;
+    }
 
-            erroresSemanticos.append(
-                "Error semántico: los parámetros de la función '" + nombreFuncion + "' no coinciden\n"
-                );
-            }
+    if (!compatibles) {
+
+        error = true;
+        erroresSemanticos.append(
+        "Error semántico: los parámetros de la función '" + nombreFuncion + "' no coinciden\n");
+        break;
+    }
         }
 
         return visitChildren(ctx);

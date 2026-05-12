@@ -1,8 +1,9 @@
-hechizo intenso sumar(intenso a, intenso b) {
+hechizo intenso sumar(intenso a, dorado b) {
    felices a + b;
 }
 
 comienza {
-   intenso resultado = sumar(5);
-   Divulga("La suma es: " + resultado);
+
+   intenso resultado = sumar(5, 5.3);
+
 }

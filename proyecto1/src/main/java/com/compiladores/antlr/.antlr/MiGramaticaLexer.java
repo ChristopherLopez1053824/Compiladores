@@ -1,4 +1,4 @@
-// Generated from MiGramatica.g4 by ANTLR 4.13.1
+// Generated from c:/Users/juanp/OneDrive/Documentos/Proyecto1 - Compiladores/Compiladores/proyecto1/src/main/java/com/compiladores/antlr/MiGramatica.g4 by ANTLR 4.13.1
 
 package com.compiladores.antlr;
 

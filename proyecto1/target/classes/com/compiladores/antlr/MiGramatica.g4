@@ -127,7 +127,9 @@ expresionUnaria
     ;
 
 llamadaFuncion
-    : ID PARENTESIS_A expresiones? PARENTESIS_C
+    : ID PARENTESIS_A
+      (expresiones (COMA expresiones)*)?
+      PARENTESIS_C
     ;
 
 // -------- CONSTANTES --------
@@ -227,7 +229,7 @@ INVALID_ID
     : [0-9]+ [a-zA-Z_]+
     ;
 UNCLOSED_CHAR
-: '\'' .*
+: '\'' .*? EOF
 ;
 UNCLOSED_STRING
     : '"' (~["\r\n])*

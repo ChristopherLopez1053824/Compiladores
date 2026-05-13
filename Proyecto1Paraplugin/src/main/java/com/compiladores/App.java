@@ -1,39 +1,10 @@
 package com.compiladores;
 
-import javax.swing.SwingUtilities;
-
-import com.formdev.flatlaf.FlatDarculaLaf;
-public class App {
-    public static void main(String[] args) {
-
-        try {
-
-            FlatDarculaLaf.setup();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(() -> {
-
-            new GUICompilador().setVisible(true);
-        });
-    }
-}
-/* 
-
-
-   package com.compiladores;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -48,261 +19,265 @@ import com.compiladores.antlr.MiGramaticaParser;
 
 public class App {
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        boolean continuar = true;
+                if (args.length == 0) {
 
-        while (continuar) {
+                        System.err.println(
+                                        "Error: debes enviar un archivo .encantia");
 
-            final boolean[] errores = { false };
-
-            try {
-
-                String ruta = null;
-
-                if (ruta == null) {
-
-                    System.out.println("\n¿Desea analizar un documento? (si/no)");
-
-                    String respuesta = scanner.nextLine();
-
-                    if (!respuesta.equalsIgnoreCase("si")) {
-                        break;
-                    }
+                        System.exit(1);
                 }
 
-                ruta = TxtManager.seleccionarArchivoTxt();
+                String ruta = args[0];
 
-                CharStream input = CharStreams.fromFileName(ruta);
+                final boolean[] errores = { false };
 
-                System.out.println(
-                        "--------------------------------------------------------------------------------------------");
+                try {
 
-                MiGramaticaLexer lexer = new MiGramaticaLexer(input);
+                        CharStream input = CharStreams.fromFileName(ruta);
 
-                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                        MiGramaticaLexer lexer = new MiGramaticaLexer(input);
 
-                tokens.fill();
+                        CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-                for (Token t : tokens.getTokens()) {
+                        tokens.fill();
 
-                    int tipo = t.getType();
+                        for (Token t : tokens.getTokens()) {
 
-                    if (tipo == MiGramaticaLexer.UNCLOSED_COMMENT) {
+                                int tipo = t.getType();
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": comentario sin cerrar"
-                        );
+                                if (tipo == Token.EOF) {
+                                        continue;
+                                }
 
-                        errores[0] = true;
-                    }
+                                if (tipo == MiGramaticaLexer.UNCLOSED_COMMENT) {
 
-                    else if (tipo == MiGramaticaLexer.INVALID_FLOAT) {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": comentario sin cerrar");
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": número decimal mal formado -> " +
-                                t.getText()
-                        );
+                                        errores[0] = true;
+                                }
 
-                        errores[0] = true;
-                    }
+                                else if (tipo == MiGramaticaLexer.INVALID_FLOAT) {
 
-                    else if (tipo == MiGramaticaLexer.INVALID_ID) {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": número decimal mal formado -> " +
+                                                                        t.getText());
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": identificador inválido -> " +
-                                t.getText()
-                        );
+                                        errores[0] = true;
+                                }
 
-                        errores[0] = true;
-                    }
+                                else if (tipo == MiGramaticaLexer.INVALID_ID) {
 
-                    else if (tipo == MiGramaticaLexer.UNCLOSED_CHAR) {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": identificador inválido -> " +
+                                                                        t.getText());
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": carácter sin cerrar -> " +
-                                t.getText()
-                        );
+                                        errores[0] = true;
+                                }
 
-                        errores[0] = true;
-                    }
+                                else if (tipo == MiGramaticaLexer.UNCLOSED_CHAR) {
 
-                    else if (tipo == MiGramaticaLexer.UNCLOSED_STRING) {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": carácter sin cerrar -> " +
+                                                                        t.getText());
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": cadena sin cerrar -> " +
-                                t.getText()
-                        );
+                                        errores[0] = true;
+                                }
 
-                        errores[0] = true;
-                    }
+                                else if (tipo == MiGramaticaLexer.UNCLOSED_STRING) {
 
-                    else if (tipo == MiGramaticaLexer.ERROR_CHAR) {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": cadena sin cerrar -> " +
+                                                                        t.getText());
 
-                        System.out.println(
-                                "Error léxico en línea " +
-                                t.getLine() +
-                                ": carácter inválido -> " +
-                                t.getText()
-                        );
+                                        errores[0] = true;
+                                }
 
-                        errores[0] = true;
-                    }
+                                else if (tipo == MiGramaticaLexer.ERROR_CHAR) {
 
-                    else {
+                                        System.err.println(
+                                                        "Error léxico en línea " +
+                                                                        t.getLine() +
+                                                                        ": carácter inválido -> " +
+                                                                        t.getText());
 
-                        String nombreToken =
-                                MiGramaticaLexer.VOCABULARY.getSymbolicName(tipo);
+                                        errores[0] = true;
+                                }
+                        }
 
-                        System.out.println(
-                                "Token: " +
-                                nombreToken +
-                                " -> " +
-                                t.getText()
-                        );
-                    }
-                }
+                        if (errores[0]) {
+                                System.exit(1);
+                        }
 
-                System.out.println(
-                        "--------------------------------------------------------------------------------------------");
+                        tokens.seek(0);
 
-                tokens.seek(0);
+                        MiGramaticaParser parser = new MiGramaticaParser(tokens);
 
-                MiGramaticaParser parser = new MiGramaticaParser(tokens);
+                        parser.removeErrorListeners();
 
-                parser.removeErrorListeners();
+                        parser.addErrorListener(
+                                        new BaseErrorListener() {
 
-                parser.addErrorListener(new BaseErrorListener() {
+                                                @Override
+                                                public void syntaxError(
+                                                                Recognizer<?, ?> recognizer,
+                                                                Object offendingSymbol,
+                                                                int line,
+                                                                int charPositionInLine,
+                                                                String msg,
+                                                                RecognitionException e) {
 
-                    @Override
-                    public void syntaxError(
-                            Recognizer<?, ?> recognizer,
-                            Object offendingSymbol,
-                            int line,
-                            int charPositionInLine,
-                            String msg,
-                            RecognitionException e
-                    ) {
+                                                        errores[0] = true;
 
-                        String mensaje = msg;
+                                                        String mensaje = msg;
 
-                        errores[0] = true;
+                                                        mensaje = mensaje.replace(
+                                                                        "missing",
+                                                                        "falta");
 
-                        mensaje = mensaje.replace("missing", "falta");
-                        mensaje = mensaje.replace("at", "en");
-                        mensaje = mensaje.replace("mismatched input", "entrada inesperada");
-                        mensaje = mensaje.replace("mismenched input", "arreglo incorrecto");
-                        mensaje = mensaje.replace("expecting", "se esperaba");
+                                                        mensaje = mensaje.replace(
+                                                                        "at",
+                                                                        "en");
 
-                        System.out.println(
-                                "Error en línea " +
-                                line +
-                                ", columna " +
-                                charPositionInLine
-                        );
+                                                        mensaje = mensaje.replace(
+                                                                        "mismatched input",
+                                                                        "entrada inesperada");
 
-                        System.out.println(mensaje);
-                    }
-                });
+                                                        mensaje = mensaje.replace(
+                                                                        "expecting",
+                                                                        "se esperaba");
 
-                ParseTree tree = parser.programa();
+                                                        System.err.println(
+                                                                        "Error sintáctico en línea " +
+                                                                                        line +
+                                                                                        ", columna " +
+                                                                                        charPositionInLine);
 
-                if (errores[0] == false) {
+                                                        System.err.println(mensaje);
+                                                }
+                                        });
 
-                    // ================= ANÁLISIS SEMÁNTICO =================
+                        ParseTree tree = parser.programa();
 
-                    TablaVisitor tablaVisitor = new TablaVisitor();
+                        if (errores[0]) {
+                                System.exit(1);
+                        }
 
-                    tablaVisitor.visit(tree);
+                        TablaVisitor tablaVisitor = new TablaVisitor();
 
-                    if (tablaVisitor.hasError()) {
+                        tablaVisitor.visit(tree);
 
-                        System.out.println("\nERRORES SEMÁNTICOS:");
-                        System.out.println(tablaVisitor.getErroresSemanticos());
-                    }
+                        if (tablaVisitor.hasError()) {
 
-                    else {
+                                System.err.println(
+                                                "Errores semánticos:");
 
-                        // ================= ÁRBOL =================
+                                System.err.println(
+                                                tablaVisitor.getErroresSemanticos());
 
-                        System.out.println("Creacion de arbol:");
+                                System.exit(1);
+                        }
 
-                        System.out.println(tree.toStringTree(parser));
+                        File archivoEntrada = new File(ruta);
 
-                        JFrame frame = new JFrame("Arbol visual");
+                        File carpetaSalida = archivoEntrada.getParentFile();
 
-                        JPanel panel = new JPanel();
+                        if (carpetaSalida == null) {
+                                carpetaSalida = new File(".");
+                        }
 
-                        TreeViewer viewer =
-                                new TreeViewer(
-                                        Arrays.asList(parser.getRuleNames()),
-                                        tree
-                                );
+                        File archivoJava = new File(
+                                        carpetaSalida,
+                                        "Programa.java");
 
-                        viewer.setScale(1.2);
+                        PrintWriter writer = new PrintWriter(archivoJava);
 
-                        panel.add(viewer);
+                        Traductor traductor = new Traductor(writer);
 
-                        frame.add(panel);
-
-                        frame.setSize(1000, 700);
-
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                        frame.setVisible(true);
-
-                        System.out.println(
-                                "--------------------------------------------------------------------------------------------");
-
-                        // ================= TRADUCCIÓN =================
-
-                        System.out.println("\nVisitando nodos:");
-
-                        PrintWriter writer = new PrintWriter("Programa.java");
-
-                        Traductor visitor = new Traductor(writer);
-
-                        visitor.visit(tree);
+                        traductor.visit(tree);
 
                         writer.close();
 
-                        // ================= ANÁLISIS CORRECTO =================
+                        System.out.println(
+                                        "Java generado correctamente.");
 
-                        System.out.println("\nAnálisis semántico correcto.");
+                        Process compileProcess = Runtime.getRuntime().exec(
+                                        "javac " +
+                                                        archivoJava.getAbsolutePath());
+
+                        compileProcess.waitFor();
+
+                        File classFile = new File(
+                                        carpetaSalida,
+                                        "Programa.class");
+
+                        if (!classFile.exists()) {
+
+                                BufferedReader errorReader = new BufferedReader(
+                                                new InputStreamReader(
+                                                                compileProcess.getErrorStream()));
+
+                                String lineaError;
+
+                                while ((lineaError = errorReader.readLine()) != null) {
+
+                                        System.err.println(lineaError);
+                                }
+
+                                System.exit(1);
+                        }
 
                         System.out.println(
-                                "--------------------------------------------------------------------------------------------");
+                                        "Compilación Java correcta.");
 
-                        // ================= TABLA =================
+                        Process runProcess = Runtime.getRuntime().exec(
+                                        "java -cp " +
+                                                        carpetaSalida.getAbsolutePath() +
+                                                        " Programa");
 
-                        System.out.println("\nTABLA DE SIMBOLOS:");
+                        BufferedReader reader = new BufferedReader(
+                                        new InputStreamReader(
+                                                        runProcess.getInputStream()));
 
-                        tablaVisitor.getTabla().imprimir();
-                    }
+                        String linea;
+
+                        while ((linea = reader.readLine()) != null) {
+
+                                System.out.println(linea);
+                        }
+
+                        runProcess.waitFor();
+
+                        System.out.println(
+                                        "Programa ejecutado correctamente.");
+
+                        System.exit(0);
+
                 }
 
-            }
+                catch (Exception e) {
 
-            catch (Exception e) {
+                        System.err.println(
+                                        "Error durante el análisis:");
 
-                System.out.println("Error durante el análisis:");
+                        System.err.println(
+                                        e.getMessage());
 
-                e.printStackTrace();
-            }
+                        e.printStackTrace();
+
+                        System.exit(1);
+                }
         }
-
-        System.out.println("Muchas gracias por usar el analizador.");
-    }
 }
-    */

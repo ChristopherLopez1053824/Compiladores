@@ -18,8 +18,28 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import com.compiladores.antlr.MiGramaticaLexer;
 import com.compiladores.antlr.MiGramaticaParser;
-
+import javax.swing.SwingUtilities;
+import com.formdev.flatlaf.FlatDarculaLaf;
 public class App {
+    public static void main(String[] args) {
+
+        try {
+
+            FlatDarculaLaf.setup();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        SwingUtilities.invokeLater(() -> {
+
+            new GUICompilador().setVisible(true);
+        });
+    }
+}
+/* 
+
 
     public static void main(String[] args) {
 
@@ -274,3 +294,4 @@ public class App {
         System.out.println("Muchas gracias por usar el analizador.");
     }
 }
+    */

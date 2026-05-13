@@ -7,6 +7,7 @@ public class TablaSimbolos {
     // Stack de scopes (cada bloque tiene su propio mapa)
     private Stack<Map<String, Simbolo>> scopes = new Stack<>();
 
+    
     // Constructor → crea scope global
     public TablaSimbolos() {
         entrarScope();
@@ -87,4 +88,29 @@ public class TablaSimbolos {
     public Stack<Map<String, Simbolo>> getScopes() {
         return scopes;
     }
+
+    @Override
+public String toString() {
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("\nVARIABLE | TIPO | VALOR\n");
+
+    sb.append("----------------------------------------\n");
+
+    for (Map<String, Simbolo> scope : scopes) {
+
+        for (Simbolo simbolo : scope.values()) {
+
+            sb.append(simbolo.nombre)
+              .append(" | ")
+              .append(simbolo.tipo)
+              .append(" | ")
+              .append(simbolo.valor)
+              .append("\n");
+        }
+    }
+
+    return sb.toString();
+}
 }

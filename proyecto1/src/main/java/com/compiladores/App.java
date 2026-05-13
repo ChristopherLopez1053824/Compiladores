@@ -1,24 +1,7 @@
 package com.compiladores;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import org.antlr.v4.gui.TreeViewer;
-import org.antlr.v4.runtime.BaseErrorListener;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
-
-import com.compiladores.antlr.MiGramaticaLexer;
-import com.compiladores.antlr.MiGramaticaParser;
 import javax.swing.SwingUtilities;
+
 import com.formdev.flatlaf.FlatDarculaLaf;
 public class App {
     public static void main(String[] args) {
@@ -40,6 +23,30 @@ public class App {
 }
 /* 
 
+
+   package com.compiladores;
+
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import org.antlr.v4.gui.TreeViewer;
+import org.antlr.v4.runtime.BaseErrorListener;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import com.compiladores.antlr.MiGramaticaLexer;
+import com.compiladores.antlr.MiGramaticaParser;
+
+public class App {
 
     public static void main(String[] args) {
 
@@ -262,9 +269,13 @@ public class App {
 
                         System.out.println("\nVisitando nodos:");
 
-                        Traductor visitor = new Traductor();
+                        PrintWriter writer = new PrintWriter("Programa.java");
+
+                        Traductor visitor = new Traductor(writer);
 
                         visitor.visit(tree);
+
+                        writer.close();
 
                         // ================= ANÁLISIS CORRECTO =================
 

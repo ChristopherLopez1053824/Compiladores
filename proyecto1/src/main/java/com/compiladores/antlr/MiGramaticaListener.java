@@ -30,16 +30,6 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitImportacion(MiGramaticaParser.ImportacionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiGramaticaParser#nombreCompleto}.
-	 * @param ctx the parse tree
-	 */
-	void enterNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiGramaticaParser#nombreCompleto}.
-	 * @param ctx the parse tree
-	 */
-	void exitNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#main}.
 	 * @param ctx the parse tree
 	 */

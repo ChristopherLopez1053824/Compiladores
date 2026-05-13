@@ -5,7 +5,6 @@ com/compiladores/antlr/MiGramaticaParser$LlamadaFuncionContext.class
 com/compiladores/antlr/MiGramaticaParser$MainContext.class
 com/compiladores/antlr/MiGramaticaParser$ExpresionLogicaContext.class
 com/compiladores/App$1.class
-com/compiladores/antlr/MiGramaticaParser$NombreCompletoContext.class
 com/compiladores/antlr/MiGramaticaParser$ExpresionIgualdadContext.class
 com/compiladores/antlr/MiGramaticaParser$InputDentroContext.class
 com/compiladores/antlr/MiGramaticaParser$ProgramaContext.class

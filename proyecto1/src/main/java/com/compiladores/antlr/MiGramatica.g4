@@ -11,11 +11,7 @@ programa
     ;
 
 importacion
-    : CONVOCA nombreCompleto PUNTO_Y_COMA
-    ;
-
-nombreCompleto
-    : ID ('.' ID)*
+    : CONVOCA STRING_CONSTANTE PUNTO_Y_COMA
     ;
 
 main
@@ -25,7 +21,7 @@ main
 // -------- FUNCIONES --------
 
 funciones
-    : HECHIZO tipo ID PARENTESIS_A parametro (COMA parametro)* PARENTESIS_C bloqueCodigo
+    : HECHIZO tipo ID PARENTESIS_A (parametro (COMA parametro)*)? PARENTESIS_C bloqueCodigo
     ;
 
 parametro
@@ -121,8 +117,8 @@ expresionMult
 
 expresionUnaria
     : PARENTESIS_A expresiones PARENTESIS_C
-    | constantes
     | llamadaFuncion
+    | constantes
     | ID
     ;
 

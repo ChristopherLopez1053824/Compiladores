@@ -43,18 +43,6 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMain(MiGramaticaParser.MainContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -35,7 +35,9 @@ public class App {
 
                 try {
 
-                        CharStream input = CharStreams.fromFileName(ruta);
+                        String codigoCompleto = procesarImports(ruta);
+
+                        CharStream input = CharStreams.fromString(codigoCompleto);
 
                         MiGramaticaLexer lexer = new MiGramaticaLexer(input);
 
@@ -278,6 +280,90 @@ public class App {
                         e.printStackTrace();
 
                         System.exit(1);
+                }
+        }
+
+        private static String procesarImports(String rutaPrincipal) {
+
+                try {
+
+                        String contenidoPrincipal = java.nio.file.Files.readString(
+                                        java.nio.file.Paths.get(rutaPrincipal));
+
+                        File archivoPrincipal = new File(rutaPrincipal);
+
+                        File carpetaBase = archivoPrincipal.getParentFile();
+
+                        if (carpetaBase == null) {
+                                carpetaBase = new File(".");
+                        }
+
+                        StringBuilder resultado = new StringBuilder();
+
+                        String[] lineas = contenidoPrincipal.split("\\R");
+
+                        for (String linea : lineas) {
+
+                                String lineaTrim = linea.trim();
+
+                                // convoca "archivo.encantia";
+
+                                if (lineaTrim.startsWith("convoca")
+                                                && lineaTrim.contains("\"")) {
+
+                                        String archivoImportado = lineaTrim
+                                                        .replace("convoca", "")
+                                                        .replace(";", "")
+                                                        .replace("\"", "")
+                                                        .trim();
+
+                                        String rutaImportada = new File(
+                                                        carpetaBase,
+                                                        archivoImportado).getAbsolutePath();
+
+                                        String contenidoImportado = "";
+
+                                        try {
+
+                                                contenidoImportado = java.nio.file.Files.readString(
+                                                                java.nio.file.Paths.get(
+                                                                                rutaImportada));
+
+                                        }
+
+                                        catch (Exception e) {
+
+                                                System.out.println(
+                                                                "Error: no se encontró el archivo importado -> "
+                                                                                + archivoImportado);
+
+                                                return "";
+                                        }
+
+                                        resultado.append("\n");
+
+                                        resultado.append(contenidoImportado);
+
+                                        resultado.append("\n");
+                                }
+
+                                else {
+
+                                        resultado.append(linea);
+
+                                        resultado.append("\n");
+                                }
+                        }
+
+                        return resultado.toString();
+
+                }
+
+                catch (Exception e) {
+
+                        e.printStackTrace();
+
+                        return "";
                 }
         }
 }

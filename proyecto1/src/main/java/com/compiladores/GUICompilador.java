@@ -13,6 +13,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -65,6 +67,7 @@ public class GUICompilador extends JFrame {
     private DefaultTableModel modeloSimbolos;
 
     private JPanel panelArbol;
+    private File archivoActual;
 
     public GUICompilador() {
         configurarVentana();
@@ -165,8 +168,7 @@ public class GUICompilador extends JFrame {
         JSplitPane split = new JSplitPane(
                 JSplitPane.VERTICAL_SPLIT,
                 scrollEditor,
-                tabs
-        );
+                tabs);
 
         split.setDividerLocation(500);
         split.setBorder(null);
@@ -227,9 +229,9 @@ public class GUICompilador extends JFrame {
 
             if (opcion == JFileChooser.APPROVE_OPTION) {
 
-                File archivo = chooser.getSelectedFile();
+                archivoActual = chooser.getSelectedFile();
 
-                String contenido = Files.readString(archivo.toPath());
+                String contenido = Files.readString(archivoActual.toPath());
 
                 editorCodigo.setText(contenido);
             }
@@ -254,13 +256,11 @@ public class GUICompilador extends JFrame {
 
                 Files.writeString(
                         archivo.toPath(),
-                        editorCodigo.getText()
-                );
+                        editorCodigo.getText());
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "✨ Archivo guardado ✨"
-                );
+                        "✨ Archivo guardado ✨");
             }
 
         } catch (Exception ex) {
@@ -295,7 +295,18 @@ public class GUICompilador extends JFrame {
 
             final boolean[] errores = { false };
 
-            String codigo = editorCodigo.getText();
+            String codigo;
+
+            if (archivoActual != null) {
+
+                codigo = cargarCodigoConImportsDesdeEditor(
+                        editorCodigo.getText(),
+                        archivoActual.toPath());
+
+            } else {
+
+                codigo = editorCodigo.getText();
+            }
 
             CharStream input = CharStreams.fromString(codigo);
 
@@ -317,7 +328,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Comentario sin cerrar"
@@ -330,7 +341,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Número decimal mal formado -> " + t.getText()
@@ -343,7 +354,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Identificador inválido -> " + t.getText()
@@ -356,7 +367,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Carácter sin cerrar -> " + t.getText()
@@ -369,7 +380,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Cadena sin cerrar -> " + t.getText()
@@ -382,7 +393,7 @@ public class GUICompilador extends JFrame {
 
                     errores[0] = true;
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Léxico",
                             t.getLine(),
                             "Carácter inválido -> " + t.getText()
@@ -391,10 +402,9 @@ public class GUICompilador extends JFrame {
                     continue;
                 }
 
-                String nombreToken =
-                        MiGramaticaLexer.VOCABULARY.getSymbolicName(tipo);
+                String nombreToken = MiGramaticaLexer.VOCABULARY.getSymbolicName(tipo);
 
-                modeloTokens.addRow(new Object[]{
+                modeloTokens.addRow(new Object[] {
                         nombreToken,
                         t.getText()
                 });
@@ -419,8 +429,7 @@ public class GUICompilador extends JFrame {
                         int line,
                         int charPositionInLine,
                         String msg,
-                        RecognitionException e
-                ) {
+                        RecognitionException e) {
 
                     errores[0] = true;
 
@@ -432,7 +441,7 @@ public class GUICompilador extends JFrame {
                     mensaje = mensaje.replace("mismenched input", "arreglo incorrecto");
                     mensaje = mensaje.replace("expecting", "se esperaba");
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Sintáctico",
                             line,
                             "Columna " + charPositionInLine + ": " + mensaje
@@ -450,7 +459,7 @@ public class GUICompilador extends JFrame {
 
                 if (tablaVisitor.hasError()) {
 
-                    modeloErrores.addRow(new Object[]{
+                    modeloErrores.addRow(new Object[] {
                             "Semántico",
                             "-",
                             tablaVisitor.getErroresSemanticos()
@@ -466,11 +475,9 @@ public class GUICompilador extends JFrame {
 
                     writer.close();
 
-                    TreeViewer viewer =
-                            new TreeViewer(
-                                    Arrays.asList(parser.getRuleNames()),
-                                    tree
-                            );
+                    TreeViewer viewer = new TreeViewer(
+                            Arrays.asList(parser.getRuleNames()),
+                            tree);
 
                     viewer.setScale(1.3);
 
@@ -482,12 +489,11 @@ public class GUICompilador extends JFrame {
 
                     panelArbol.repaint();
 
-                    for (Map<String, Simbolo> scope :
-                            tablaVisitor.getTabla().getScopes()) {
+                    for (Map<String, Simbolo> scope : tablaVisitor.getTabla().getScopes()) {
 
                         for (Simbolo simbolo : scope.values()) {
 
-                            modeloSimbolos.addRow(new Object[]{
+                            modeloSimbolos.addRow(new Object[] {
                                     simbolo.nombre,
                                     simbolo.tipo,
                                     simbolo.valor
@@ -497,14 +503,13 @@ public class GUICompilador extends JFrame {
 
                     JOptionPane.showMessageDialog(
                             this,
-                            "✨ Análisis correcto y Programa.java generado ✨"
-                    );
+                            "✨ Análisis correcto y Programa.java generado ✨");
                 }
             }
 
         } catch (Exception ex) {
 
-            modeloErrores.addRow(new Object[]{
+            modeloErrores.addRow(new Object[] {
                     "General",
                     "-",
                     ex.getMessage()
@@ -518,22 +523,17 @@ public class GUICompilador extends JFrame {
 
         try {
 
-            ProcessBuilder compilador =
-                    new ProcessBuilder(
-                            "javac",
-                            "Programa.java"
-                    );
+            ProcessBuilder compilador = new ProcessBuilder(
+                    "javac",
+                    "Programa.java");
 
             compilador.redirectErrorStream(true);
 
             Process procesoCompilar = compilador.start();
 
-            BufferedReader lectorCompilacion =
-                    new BufferedReader(
-                            new InputStreamReader(
-                                    procesoCompilar.getInputStream()
-                            )
-                    );
+            BufferedReader lectorCompilacion = new BufferedReader(
+                    new InputStreamReader(
+                            procesoCompilar.getInputStream()));
 
             StringBuilder erroresCompilacion = new StringBuilder();
 
@@ -548,7 +548,7 @@ public class GUICompilador extends JFrame {
 
             if (resultadoCompilacion != 0) {
 
-                modeloErrores.addRow(new Object[]{
+                modeloErrores.addRow(new Object[] {
                         "Java",
                         "-",
                         erroresCompilacion.toString()
@@ -558,28 +558,22 @@ public class GUICompilador extends JFrame {
                         this,
                         erroresCompilacion.toString(),
                         "❌ Error al compilar Programa.java",
-                        JOptionPane.ERROR_MESSAGE
-                );
+                        JOptionPane.ERROR_MESSAGE);
 
                 return;
             }
 
-            ProcessBuilder ejecutor =
-                    new ProcessBuilder(
-                            "java",
-                            "Programa"
-                    );
+            ProcessBuilder ejecutor = new ProcessBuilder(
+                    "java",
+                    "Programa");
 
             ejecutor.redirectErrorStream(true);
 
             Process procesoEjecutar = ejecutor.start();
 
-            BufferedReader lectorEjecucion =
-                    new BufferedReader(
-                            new InputStreamReader(
-                                    procesoEjecutar.getInputStream()
-                            )
-                    );
+            BufferedReader lectorEjecucion = new BufferedReader(
+                    new InputStreamReader(
+                            procesoEjecutar.getInputStream()));
 
             StringBuilder salida = new StringBuilder();
 
@@ -598,12 +592,11 @@ public class GUICompilador extends JFrame {
                             ? "✨ El programa se ejecutó sin salida ✨"
                             : salida.toString(),
                     "✨ Resultado del Programa ✨",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+                    JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception ex) {
 
-            modeloErrores.addRow(new Object[]{
+            modeloErrores.addRow(new Object[] {
                     "Ejecución",
                     "-",
                     ex.getMessage()
@@ -613,9 +606,52 @@ public class GUICompilador extends JFrame {
                     this,
                     ex.getMessage(),
                     "❌ Error al ejecutar",
-                    JOptionPane.ERROR_MESSAGE
-            );
+                    JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private String cargarCodigoConImportsDesdeEditor(
+            String contenido,
+            Path rutaArchivoPrincipal) throws Exception {
+
+        Pattern pattern = Pattern.compile("convoca\\s+\"(.*?)\";");
+
+        Matcher matcher = pattern.matcher(contenido);
+
+        StringBuilder contenidoImports = new StringBuilder();
+
+        while (matcher.find()) {
+
+            String archivoImportado = matcher.group(1);
+
+            Path carpetaBase = rutaArchivoPrincipal.getParent();
+
+            Path rutaImportada = carpetaBase.resolve(archivoImportado);
+
+            if (!Files.exists(rutaImportada)) {
+
+                modeloErrores.addRow(
+                        new Object[] {
+                                "Importación",
+                                "-",
+                                "No se encontró el archivo importado -> " + archivoImportado
+                        });
+
+                return "";
+            }
+
+            String contenidoImportado = Files.readString(rutaImportada);
+
+            contenidoImports.append("\n");
+            contenidoImports.append(contenidoImportado);
+            contenidoImports.append("\n");
+        }
+
+        contenido = contenido.replaceAll(
+                "convoca\\s+\"(.*?)\";",
+                "");
+
+        return contenidoImports.toString() + "\n" + contenido;
     }
 
     public static void main(String[] args) {

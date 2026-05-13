@@ -25,12 +25,6 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImportacion(MiGramaticaParser.ImportacionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MiGramaticaParser#nombreCompleto}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNombreCompleto(MiGramaticaParser.NombreCompletoContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#main}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

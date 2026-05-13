@@ -1,16 +1,20 @@
 package com.compiladores;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
-import com.compiladores.antlr.*;
+
+import com.compiladores.antlr.MiGramaticaBaseVisitor;
+import com.compiladores.antlr.MiGramaticaParser;
 
 public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
 
     private TablaSimbolos tabla = new TablaSimbolos();
     private boolean error = false;
     private StringBuilder erroresSemanticos = new StringBuilder();
-    Map<String, List<String>> funciones  = new HashMap<>();
+    Map<String, List<String>> funciones = new HashMap<>();
+    Map<String, String> tiposFunciones = new HashMap<>();
 
     public TablaSimbolos getTabla() {
         return tabla;
@@ -50,33 +54,37 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
 
         String tipo = ctx.tipo().getText();
         String nombre = ctx.ID().getText();
-
         String valor = "null";
 
-        // Si tiene asignación
-        if (ctx.expresiones() != null) {
-            valor = ctx.expresiones().getText();
-        }
-
-        // Verificar redeclaración
         if (tabla.getScopes().peek().containsKey(nombre)) {
 
-            error = true;
-
-            erroresSemanticos.append(
-                "Error semántico: variable '"
-                + nombre +
-            "' ya declarada en este scope\n"
-            );
+            marcarError(
+                    "Error semántico: variable '" +
+                            nombre +
+                            "' ya declarada en este scope\n");
 
             return null;
         }
 
-        tabla.declarar(nombre, tipo, valor);
-
         if (ctx.expresiones() != null) {
-            visit(ctx.expresiones());
+
+            valor = ctx.expresiones().getText();
+
+            String tipoValor = obtenerTipo(ctx.expresiones());
+
+            if (!tipo.equals(tipoValor)) {
+                marcarError(
+                        "Error semántico: no se puede asignar " +
+                                tipoValor +
+                                " a variable de tipo " +
+                                tipo +
+                                " -> " +
+                                nombre +
+                                "\n");
+            }
         }
+
+        tabla.declarar(nombre, tipo, valor);
 
         return null;
     }
@@ -88,21 +96,32 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
 
         String nombre = ctx.ID().getText();
 
-        // Verificar existencia
         if (!tabla.existe(nombre)) {
 
-            error = true;
-
-            erroresSemanticos.append(
-                "Error semántico: variable '"
-                + nombre +
-                "' no declarada"
-            );
+            marcarError(
+                    "Error semántico: variable '" +
+                            nombre +
+                            "' no declarada\n");
 
             return null;
         }
 
-        return visitChildren(ctx);
+        String tipoVariable = tabla.obtener(nombre).tipo;
+        String tipoValor = obtenerTipo(ctx.expresiones());
+
+        if (!tipoVariable.equals(tipoValor)) {
+
+            marcarError(
+                    "Error semántico: no se puede asignar " +
+                            tipoValor +
+                            " a variable de tipo " +
+                            tipoVariable +
+                            " -> " +
+                            nombre +
+                            "\n");
+        }
+
+        return null;
     }
 
     // ================= USO DE IDS =================
@@ -120,10 +139,9 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
                 error = true;
 
                 erroresSemanticos.append(
-                    "Error semántico: variable '" +
-                    nombre +
-                    "' no declarada\n"
-                );
+                        "Error semántico: variable '" +
+                                nombre +
+                                "' no declarada\n");
             }
         }
 
@@ -134,19 +152,21 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
 
     @Override
     public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
-    String nombreFuncion = ctx.ID().getText();
 
-    List<String> tiposParametros = new ArrayList<>();
+        String nombreFuncion = ctx.ID().getText();
+        String tipoRetorno = ctx.tipo().getText();
 
-    for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
-        tiposParametros.add(p.tipo().getText());
-    }
+        List<String> tiposParametros = new ArrayList<>();
 
-    funciones.put(nombreFuncion, tiposParametros);
-    
-    tabla.entrarScope();
+        for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
+            tiposParametros.add(p.tipo().getText());
+        }
 
-        // Parámetros
+        funciones.put(nombreFuncion, tiposParametros);
+        tiposFunciones.put(nombreFuncion, tipoRetorno);
+
+        tabla.entrarScope();
+
         for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
 
             String tipo = p.tipo().getText();
@@ -174,118 +194,309 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
             error = true;
 
             erroresSemanticos.append(
-                "Error semántico: variable '" +
-                nombre +
-                "' no declarada para leer\n"
-            );
+                    "Error semántico: variable '" +
+                            nombre +
+                            "' no declarada para leer\n");
         }
 
         return null;
     }
 
-
     private String obtenerTipo(MiGramaticaParser.ExpresionesContext ctx) {
-    String texto = ctx.getText();
+        return tipoLogica(ctx.expresionLogica());
+    }
 
-        // Enteros
-        if (texto.matches("[0-9]+")) {
+    private String tipoLogica(MiGramaticaParser.ExpresionLogicaContext ctx) {
+
+        String tipo = tipoIgualdad(ctx.expresionIgualdad(0));
+
+        for (int i = 1; i < ctx.expresionIgualdad().size(); i++) {
+
+            String tipoDer = tipoIgualdad(ctx.expresionIgualdad(i));
+
+            if (!tipo.equals("bondad") || !tipoDer.equals("bondad")) {
+                marcarError("Error semántico: operadores lógicos solo aceptan bondad\n");
+                return "error";
+            }
+
+            tipo = "bondad";
+        }
+
+        return tipo;
+    }
+
+    private String tipoIgualdad(MiGramaticaParser.ExpresionIgualdadContext ctx) {
+
+        String tipo = tipoRelacional(ctx.expresionRelacional(0));
+
+        for (int i = 1; i < ctx.expresionRelacional().size(); i++) {
+
+            String tipoDer = tipoRelacional(ctx.expresionRelacional(i));
+
+            if (!tipo.equals(tipoDer)) {
+                marcarError("Error semántico: comparación entre tipos distintos: "
+                        + tipo + " y " + tipoDer + "\n");
+                return "error";
+            }
+
+            tipo = "bondad";
+        }
+
+        return tipo;
+    }
+
+    private String tipoRelacional(MiGramaticaParser.ExpresionRelacionalContext ctx) {
+
+        String tipo = tipoSuma(ctx.expresionSuma(0));
+
+        for (int i = 1; i < ctx.expresionSuma().size(); i++) {
+
+            String tipoDer = tipoSuma(ctx.expresionSuma(i));
+
+            if (!esNumerico(tipo) || !esNumerico(tipoDer)) {
+                marcarError("Error semántico: operadores relacionales solo aceptan números\n");
+                return "error";
+            }
+
+            if (!tipo.equals(tipoDer)) {
+                marcarError("Error semántico: comparación numérica con tipos distintos: "
+                        + tipo + " y " + tipoDer + "\n");
+                return "error";
+            }
+
+            tipo = "bondad";
+        }
+
+        return tipo;
+    }
+
+    private String tipoSuma(MiGramaticaParser.ExpresionSumaContext ctx) {
+
+        String tipo = tipoMult(ctx.expresionMult(0));
+
+        for (int i = 1; i < ctx.expresionMult().size(); i++) {
+
+            String tipoDer = tipoMult(ctx.expresionMult(i));
+
+            if (!esNumerico(tipo) || !esNumerico(tipoDer)) {
+                marcarError("Error semántico: suma/resta solo acepta tipos numéricos\n");
+                return "error";
+            }
+
+            if (!tipo.equals(tipoDer)) {
+                marcarError("Error semántico: no se pueden operar tipos distintos: "
+                        + tipo + " y " + tipoDer + "\n");
+                return "error";
+            }
+        }
+
+        return tipo;
+    }
+
+    private String tipoMult(MiGramaticaParser.ExpresionMultContext ctx) {
+
+        String tipo = tipoUnaria(ctx.expresionUnaria(0));
+
+        for (int i = 1; i < ctx.expresionUnaria().size(); i++) {
+
+            String tipoDer = tipoUnaria(ctx.expresionUnaria(i));
+
+            if (!esNumerico(tipo) || !esNumerico(tipoDer)) {
+                marcarError("Error semántico: multiplicación/división solo acepta tipos numéricos\n");
+                return "error";
+            }
+
+            if (!tipo.equals(tipoDer)) {
+                marcarError("Error semántico: no se pueden operar tipos distintos: "
+                        + tipo + " y " + tipoDer + "\n");
+                return "error";
+            }
+        }
+
+        return tipo;
+    }
+
+    private String tipoUnaria(MiGramaticaParser.ExpresionUnariaContext ctx) {
+
+        if (ctx.expresiones() != null) {
+            return obtenerTipo(ctx.expresiones());
+        }
+
+        if (ctx.constantes() != null) {
+            return tipoConstante(ctx.constantes());
+        }
+
+        if (ctx.ID() != null) {
+
+            String nombre = ctx.ID().getText();
+
+            if (!tabla.existe(nombre)) {
+                marcarError("Error semántico: variable '" + nombre + "' no declarada\n");
+                return "error";
+            }
+
+            return tabla.obtener(nombre).tipo;
+        }
+
+        if (ctx.llamadaFuncion() != null) {
+            return tipoLlamadaFuncion(ctx.llamadaFuncion());
+        }
+
+        return "error";
+    }
+
+    private String tipoLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx) {
+
+        String nombreFuncion = ctx.ID().getText();
+
+        if (!funciones.containsKey(nombreFuncion)) {
+
+            marcarError(
+                    "Error semántico: la función '" +
+                            nombreFuncion +
+                            "' no existe\n");
+
+            return "error";
+        }
+
+        List<String> tiposEsperados = funciones.get(nombreFuncion);
+
+        int parametrosEsperados = tiposEsperados.size();
+        int parametrosRecibidos = ctx.expresiones().size();
+
+        if (parametrosRecibidos != parametrosEsperados) {
+
+            marcarError(
+                    "Error semántico: la función '" +
+                            nombreFuncion +
+                            "' esperaba " +
+                            parametrosEsperados +
+                            " parámetro(s) y recibió " +
+                            parametrosRecibidos +
+                            "\n");
+
+            return "error";
+        }
+
+        for (int i = 0; i < parametrosRecibidos; i++) {
+
+            String tipoEsperado = tiposEsperados.get(i);
+            String tipoRecibido = obtenerTipo(ctx.expresiones(i));
+
+            if (!tipoEsperado.equals(tipoRecibido)) {
+
+                marcarError(
+                        "Error semántico: parámetro " +
+                                (i + 1) +
+                                " de la función '" +
+                                nombreFuncion +
+                                "' esperaba " +
+                                tipoEsperado +
+                                " pero recibió " +
+                                tipoRecibido +
+                                "\n");
+
+                return "error";
+            }
+        }
+
+        return tiposFunciones.get(nombreFuncion);
+    }
+
+    private String tipoConstante(MiGramaticaParser.ConstantesContext ctx) {
+
+        if (ctx.INT_CONSTANTE() != null)
             return "intenso";
-        }
-
-        // Float
-        if (texto.matches("[0-9]+\\.[0-9]+")) {
+        if (ctx.FLOAT_CONSTANTE() != null)
             return "fenix";
-        }
-
-        // Strings
-        if (texto.startsWith("\"") && texto.endsWith("\"")) {
+        if (ctx.CHAR_CONSTANTE() != null)
+            return "chispa";
+        if (ctx.STRING_CONSTANTE() != null)
             return "Cancion";
-        }
-
-        // Booleanos
-        if (texto.equals("true") || texto.equals("false")) {
+        if (ctx.BOOLEAN_CONSTANTE() != null)
             return "bondad";
-        }
 
-        // Variables
-        if (tabla.existe(texto)) {
+        return "error";
+    }
 
-            Simbolo s = tabla.obtener(texto);
-            return s.tipo;
-        }
+    private boolean esNumerico(String tipo) {
+        return tipo.equals("intenso")
+                || tipo.equals("fenix")
+                || tipo.equals("dorado");
+    }
 
-        return "desconocido";
+    private void marcarError(String mensaje) {
+        error = true;
+        erroresSemanticos.append(mensaje);
     }
 
     @Override
     public Void visitLlamadaFuncion(MiGramaticaParser.LlamadaFuncionContext ctx) {
 
-    String nombreFuncion = ctx.ID().getText();
+        String nombreFuncion = ctx.ID().getText();
 
-    int parametrosRecibidos = ctx.expresiones().size();
+        int parametrosRecibidos = ctx.expresiones().size();
 
-    // Verificar existencia
-    if (!funciones.containsKey(nombreFuncion)) {
+        // Verificar existencia
+        if (!funciones.containsKey(nombreFuncion)) {
 
-        error = true;
+            error = true;
 
-        erroresSemanticos.append(
-            "Error semántico: la función '"
-            + nombreFuncion +
-            "' no existe\n"
-        );
+            erroresSemanticos.append(
+                    "Error semántico: la función '"
+                            + nombreFuncion +
+                            "' no existe\n");
 
-        return null;
-    }
+            return null;
+        }
 
-    List<String> tiposEsperados = funciones.get(nombreFuncion);
+        List<String> tiposEsperados = funciones.get(nombreFuncion);
 
-    int parametrosEsperados = tiposEsperados.size();
+        int parametrosEsperados = tiposEsperados.size();
 
-    // Verificar cantidad
-    if (parametrosRecibidos != parametrosEsperados) {
+        // Verificar cantidad
+        if (parametrosRecibidos != parametrosEsperados) {
 
-        error = true;
+            error = true;
 
-        erroresSemanticos.append(
-            "Error semántico: la función '"
-            + nombreFuncion +
-            "' esperaba "
-            + parametrosEsperados +
-            " parámetro(s) y recibió "
-            + parametrosRecibidos +
-            "\n"
-        );
+            erroresSemanticos.append(
+                    "Error semántico: la función '"
+                            + nombreFuncion +
+                            "' esperaba "
+                            + parametrosEsperados +
+                            " parámetro(s) y recibió "
+                            + parametrosRecibidos +
+                            "\n");
 
-        return null;
-    }
+            return null;
+        }
 
-    // Verificar tipos
-    for (int i = 0; i < parametrosRecibidos; i++) {
+        // Verificar tipos
+        for (int i = 0; i < parametrosRecibidos; i++) {
 
-        String tipoEsperado = tiposEsperados.get(i);
-        String tipoRecibido = obtenerTipo(ctx.expresiones(i));
-        boolean compatibles = false;
+            String tipoEsperado = tiposEsperados.get(i);
+            String tipoRecibido = obtenerTipo(ctx.expresiones(i));
+            boolean compatibles = false;
 
-        // mismos tipos
-    if (tipoEsperado.equals(tipoRecibido)) {
-        compatibles = true;
-    }
+            // mismos tipos
+            if (tipoEsperado.equals(tipoRecibido)) {
+                compatibles = true;
+            }
 
-    // compatibilidad numérica
-    else if ((tipoEsperado.equals("intenso") || tipoEsperado.equals("fenix") || tipoEsperado.equals("dorado"))
-        && (tipoRecibido.equals("intenso") || tipoRecibido.equals("fenix") || tipoRecibido.equals("dorado")))
-    {
-        compatibles = true;
-    }
+            // compatibilidad numérica
+            else if ((tipoEsperado.equals("intenso") || tipoEsperado.equals("fenix") || tipoEsperado.equals("dorado"))
+                    && (tipoRecibido.equals("intenso") || tipoRecibido.equals("fenix")
+                            || tipoRecibido.equals("dorado"))) {
+                compatibles = true;
+            }
 
-    if (!compatibles) {
+            if (!compatibles) {
 
-        error = true;
-        erroresSemanticos.append(
-        "Error semántico: los parámetros de la función '" + nombreFuncion + "' no coinciden\n");
-        break;
-    }
+                error = true;
+                erroresSemanticos.append(
+                        "Error semántico: los parámetros de la función '" + nombreFuncion + "' no coinciden\n");
+                break;
+            }
         }
 
         return visitChildren(ctx);

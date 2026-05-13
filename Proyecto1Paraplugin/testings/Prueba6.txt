@@ -1,0 +1,10 @@
+convoca java.lang.Math;
+
+comienza {
+
+   dorado numero = 16;
+
+   dorado raiz = sqrt(numero);
+
+   Divulga("La raíz cuadrada es: " + raiz);
+}

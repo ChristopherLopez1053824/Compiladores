@@ -1,0 +1,16 @@
+convoca java.util;
+
+comienza {
+   intenso edad;
+
+   Divulga("Ingresa tu edad: ");
+   escuchar(edad);
+
+   edad = 10 @ 5;
+
+   destino (edad >= 18) {
+      Divulga("Mayor");
+   } alterno {
+      Divulga("Menor");
+   }
+}

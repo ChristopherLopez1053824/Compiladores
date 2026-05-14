@@ -151,7 +151,7 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
 
     // ================= FUNCIONES =================
 
-    @Override
+@Override
 public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
 
     String nombreFuncion = ctx.ID().getText();
@@ -164,6 +164,7 @@ public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
     }
 
     funciones.put(nombreFuncion, tiposParametros);
+    tiposFunciones.put(nombreFuncion, tipoRetorno);
 
     String tipoAnterior = tipoFuncionActual;
     tipoFuncionActual = tipoRetorno;
@@ -171,7 +172,6 @@ public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
     tabla.entrarScope();
 
     for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
-
         String tipo = p.tipo().getText();
         String nombre = p.ID().getText();
 
@@ -186,7 +186,6 @@ public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
 
     return null;
 }
-
 @Override
 public Void visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) {
 
@@ -361,6 +360,7 @@ public Void visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) {
 
         return tipo;
     }
+    
 
     private String tipoUnaria(MiGramaticaParser.ExpresionUnariaContext ctx) {
 

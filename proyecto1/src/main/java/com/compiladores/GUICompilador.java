@@ -55,7 +55,7 @@ public class GUICompilador extends JFrame {
     private final Color morado = new Color(140, 82, 255);
     private final Color texto = new Color(240, 240, 255);
     private final Color cyan = new Color(0, 220, 255);
-
+    
     private RSyntaxTextArea editorCodigo;
 
     private JTable tablaTokens;
@@ -246,26 +246,66 @@ public class GUICompilador extends JFrame {
 
         try {
 
+            File archivoJava = new File("Programa.java");
+
+            File archivoClass = new File("Programa.class");
+
+            if (!archivoJava.exists()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "❌ Primero debes analizar un programa válido");
+
+                return;
+            }
+
             JFileChooser chooser = new JFileChooser();
+
+            chooser.setDialogTitle(
+                    "Selecciona carpeta para exportar");
+
+            chooser.setFileSelectionMode(
+                    JFileChooser.DIRECTORIES_ONLY);
 
             int opcion = chooser.showSaveDialog(this);
 
             if (opcion == JFileChooser.APPROVE_OPTION) {
 
-                File archivo = chooser.getSelectedFile();
+                File carpetaDestino = chooser.getSelectedFile();
 
-                Files.writeString(
-                        archivo.toPath(),
-                        editorCodigo.getText());
+                // ================= COPIAR JAVA =================
+
+                Files.copy(
+                        archivoJava.toPath(),
+                        carpetaDestino
+                                .toPath()
+                                .resolve("Programa.java"),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+                // ================= COPIAR CLASS =================
+
+                if (archivoClass.exists()) {
+
+                    Files.copy(
+                            archivoClass.toPath(),
+                            carpetaDestino
+                                    .toPath()
+                                    .resolve("Programa.class"),
+                            java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                }
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "✨ Archivo guardado ✨");
+                        "✨ Archivos exportados correctamente ✨");
             }
 
-        } catch (Exception ex) {
+        }
 
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage());
         }
     }
 

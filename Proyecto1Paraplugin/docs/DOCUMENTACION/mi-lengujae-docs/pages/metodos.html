@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encantia Docs</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h2>✨ Encantia</h2>
+
+    <nav>
+      <a href="../index.html">📜 Inicio</a>
+
+      <div class="menu-magico-sidebar">
+        <button class="magic-btn" onclick="toggleMenu()">✨ Estructura Mágica</button>
+
+        <div id="submenu" class="submenu">
+                     <a href="estructuras.html">✨ Estructuras</a>
+  <a href="variables.html">🧙 Variables</a>
+  <a href="metodos.html">⚙️ Métodos</a>
+  <a href="condicionales.html">🧩 Condicionales</a>
+
+  <a href="ciclos.html">🔁 Ciclos</a>
+  <a href="importaciones.html">📦 Importaciones</a>
+
+        </div>
+      </div>
+
+    </nav>
+  </aside>
+
+  <main class="content">
+
+   <h1 class="title">⚙️ Métodos</h1>
+
+<div class="card">
+<p>
+Los métodos, llamados hechizos en Encantia, son bloques de código que realizan una tarea específica.
+Sirven para reutilizar código y organizar mejor el programa.
+</p>
+
+<p>Se definen usando la palabra hechizo, indicando:</p>
+
+<ul>
+  <li>el tipo de retorno</li>
+  <li>el nombre</li>
+  <li>los parámetros (opcional)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 1: Hechizo sin retorno</h2>
+
+<pre class="code">
+hechizo vasto saludar() {
+    Divulga("Hola viajero");
+}
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li><strong>vasto</strong> significa que no devuelve ningún valor</li>
+  <li><strong>saludar()</strong> es el nombre del método</li>
+  <li>Dentro del bloque se ejecuta un print</li>
+  <li>Este método solo realiza una acción</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 2: Hechizo con retorno</h2>
+
+<pre class="code">
+hechizo intenso sumar(intenso a, intenso b) {
+    felices a + b;
+}
+
+intenso resultado = sumar(3, 4);
+Divulga(resultado);
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li>El método recibe dos valores (a y b)</li>
+  <li><strong>felices</strong> devuelve el resultado de la suma</li>
+  <li>El valor retornado se guarda en resultado</li>
+  <li>Luego se imprime</li>
+</ul>
+</div>
+
+  </main>
+
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

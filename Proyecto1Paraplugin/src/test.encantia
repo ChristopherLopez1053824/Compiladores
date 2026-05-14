@@ -1,0 +1,7 @@
+comienza {
+
+    intenso edad = 20;
+
+    Divulga("Hola");
+
+}

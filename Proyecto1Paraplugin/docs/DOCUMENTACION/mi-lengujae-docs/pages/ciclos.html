@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encantia Docs</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h2>✨ Encantia</h2>
+
+    <nav>
+      <a href="../index.html">📜 Inicio</a>
+
+      <div class="menu-magico-sidebar">
+        <button class="magic-btn" onclick="toggleMenu()">✨ Estructura Mágica</button>
+
+        <div id="submenu" class="submenu">
+                   <a href="estructuras.html">✨ Estructuras</a>
+  <a href="variables.html">🧙 Variables</a>
+  <a href="metodos.html">⚙️ Métodos</a>
+  <a href="condicionales.html">🧩 Condicionales</a>
+
+  <a href="ciclos.html">🔁 Ciclos</a>
+  <a href="importaciones.html">📦 Importaciones</a>
+        </div>
+      </div>
+
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    <h1 class="title">🔁 Ciclos</h1>
+
+<div class="card">
+<p>
+Los ciclos en Encantia permiten repetir un bloque de código varias veces sin necesidad de escribirlo repetidamente.
+Esto es útil cuando se desea ejecutar una acción muchas veces, como mostrar mensajes, recorrer datos o realizar cálculos.
+</p>
+
+<p>Encantia cuenta con dos tipos principales de ciclos:</p>
+
+<ul>
+  <li><strong>viaje</strong> → se usa cuando sabes cuántas veces quieres repetir algo (equivalente a for)</li>
+  <li><strong>guardian</strong> → se usa cuando la repetición depende de una condición (equivalente a while)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 1: Uso de viaje</h2>
+
+<pre class="code">
+viaje (intenso i = 0; i < 3; i++) {
+    Divulga("Número: " + i);
+}
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li><strong>intenso i = 0;</strong> → se crea una variable que inicia en 0</li>
+  <li><strong>i &lt; 3</strong> → el ciclo se ejecuta mientras i sea menor que 3</li>
+  <li><strong>i++</strong> → en cada repetición, i aumenta en 1</li>
+  <li><strong>Divulga(...)</strong> → imprime el valor actual de i</li>
+</ul>
+
+<h3>🔁 Resultado:</h3>
+
+<pre class="code">
+Número: 0
+Número: 1
+Número: 2
+</pre>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 2: Uso de guardian</h2>
+
+<pre class="code">
+intenso i = 0;
+
+guardian (i < 3) {
+    Divulga("Valor: " + i);
+    i = i + 1;
+}
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li>Primero se crea la variable <strong>i</strong></li>
+  <li>El ciclo se ejecuta mientras <strong>i &lt; 3</strong></li>
+  <li>Dentro del bloque:</li>
+  <li>Se imprime el valor</li>
+  <li>Se incrementa manualmente (<strong>i = i + 1</strong>)</li>
+  <li>Si no se incrementa, el ciclo nunca terminaría ⚠️</li>
+</ul>
+</div>
+
+  </main>
+
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

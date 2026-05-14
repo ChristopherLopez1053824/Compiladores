@@ -1,9 +1,7 @@
-hechizo intenso sumar(intenso a, dorado b) {
-   felices a + b;
-}
-
+convoca "Prueba35.encantia";
 comienza {
 
-   intenso resultado = sumar(5, 5.3);
+   intenso resultado = sumar(5,5);
+   Divulga (resultado);
 
 }

@@ -5,7 +5,7 @@ return a+b;
 }
 public static void main(String[] args)
 {
-int resultado = sumar(5,3);
+int resultado = sumar(5,5);
 System.out.println(resultado);
 }
 }

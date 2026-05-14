@@ -21,14 +21,15 @@ public class App {
         });
     }
 }
-/* 
-
-
-   package com.compiladores;
+    /*package com.compiladores;
 
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -74,7 +75,9 @@ public class App {
 
                 ruta = TxtManager.seleccionarArchivoTxt();
 
-                CharStream input = CharStreams.fromFileName(ruta);
+                String contenidoCompleto = cargarArchivoConImports(ruta);
+
+                CharStream input = CharStreams.fromString(contenidoCompleto);
 
                 System.out.println(
                         "--------------------------------------------------------------------------------------------");
@@ -304,5 +307,54 @@ public class App {
 
         System.out.println("Muchas gracias por usar el analizador.");
     }
-}
-    */
+
+
+    private static String cargarArchivoConImports(String ruta) throws Exception {
+
+        String contenido = Files.readString(Paths.get(ruta));
+
+        Pattern pattern = Pattern.compile("convoca\\s+\"(.*?)\";");
+        Matcher matcher = pattern.matcher(contenido);
+
+        StringBuilder contenidoImports = new StringBuilder();
+
+        while (matcher.find()) {
+
+            String archivoImportado = matcher.group(1);
+
+            String rutaImportada =
+                    Paths.get(ruta)
+                            .getParent()
+                            .resolve(archivoImportado)
+                            .toString();
+
+            System.out.println("Importando archivo: " + rutaImportada);
+
+            String contenidoImportado = "";
+
+            try {
+
+                contenidoImportado =
+                        Files.readString(Paths.get(rutaImportada));
+
+            } catch (Exception e) {
+
+                System.out.println(
+                    "Error: no se encontró el archivo importado -> "
+                    + archivoImportado
+                );
+
+                return "";
+            }
+
+            contenidoImports.append("\n");
+            contenidoImports.append(contenidoImportado);
+            contenidoImports.append("\n");
+        }
+
+        contenido = contenido.replaceAll("convoca\\s+\"(.*?)\";", "");
+
+        return contenidoImports.toString() + "\n" + contenido;
+    }
+
+}*/

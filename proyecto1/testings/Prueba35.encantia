@@ -1,0 +1,3 @@
+hechizo intenso sumar(intenso a, intenso b) {
+   felices a + b;
+}

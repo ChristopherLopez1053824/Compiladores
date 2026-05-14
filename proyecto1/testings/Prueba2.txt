@@ -1,3 +1,4 @@
+convoca "Prueba35.txt";
 comienza {
    intenso x = 5;
    intenso y = 5;

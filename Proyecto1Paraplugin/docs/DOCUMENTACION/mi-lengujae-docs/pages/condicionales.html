@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encantia Docs</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h2>✨ Encantia</h2>
+
+    <nav>
+      <a href="../index.html">📜 Inicio</a>
+
+      <div class="menu-magico-sidebar">
+        <button class="magic-btn" onclick="toggleMenu()">✨ Estructura Mágica</button>
+
+        <div id="submenu" class="submenu">
+                     <a href="estructuras.html">✨ Estructuras</a>
+  <a href="variables.html">🧙 Variables</a>
+  <a href="metodos.html">⚙️ Métodos</a>
+  <a href="condicionales.html">🧩 Condicionales</a>
+
+  <a href="ciclos.html">🔁 Ciclos</a>
+  <a href="importaciones.html">📦 Importaciones</a>
+
+        </div>
+      </div>
+
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    <h1 class="title">🧩 Condicionales</h1>
+
+<div class="card">
+<p>
+Los condicionales permiten que el programa tome decisiones dependiendo de si una condición es verdadera o falsa.
+Esto hace que el programa pueda comportarse de diferentes maneras según los datos que reciba.
+</p>
+
+<p>Encantia usa:</p>
+
+<ul>
+  <li><strong>destino</strong> → si se cumple la condición (if)</li>
+  <li><strong>alterno</strong> → si no se cumple (else)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 1</h2>
+
+<pre class="code">
+intenso edad = 20;
+
+destino (edad >= 18) {
+    Divulga("Eres mayor de edad");
+}
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li>Se declara una variable edad</li>
+  <li>Se evalúa si edad >= 18</li>
+  <li>Como 20 es mayor que 18, se ejecuta el bloque</li>
+  <li>Si no se cumpliera, no pasaría nada (porque no hay alterno)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✨ Ejemplo 2</h2>
+
+<pre class="code">
+intenso edad = 15;
+
+destino (edad >= 18) {
+    Divulga("Puedes entrar");
+} alterno {
+    Divulga("Acceso denegado");
+}
+</pre>
+
+<h3>🔍 Explicación:</h3>
+<ul>
+  <li>Se evalúa la condición</li>
+  <li>Como 15 no es mayor o igual a 18:</li>
+  <li>Se ignora el bloque de destino</li>
+  <li>Se ejecuta alterno</li>
+  <li>Esto permite manejar dos posibles caminos</li>
+</ul>
+</div>
+
+  </main>
+
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>

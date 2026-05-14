@@ -15,6 +15,7 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
     private StringBuilder erroresSemanticos = new StringBuilder();
     Map<String, List<String>> funciones = new HashMap<>();
     Map<String, String> tiposFunciones = new HashMap<>();
+    private String tipoFuncionActual = null;
 
     public TablaSimbolos getTabla() {
         return tabla;
@@ -151,36 +152,81 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
     // ================= FUNCIONES =================
 
     @Override
-    public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
+public Void visitFunciones(MiGramaticaParser.FuncionesContext ctx) {
 
-        String nombreFuncion = ctx.ID().getText();
-        String tipoRetorno = ctx.tipo().getText();
+    String nombreFuncion = ctx.ID().getText();
+    String tipoRetorno = ctx.tipo().getText();
 
-        List<String> tiposParametros = new ArrayList<>();
+    List<String> tiposParametros = new ArrayList<>();
 
-        for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
-            tiposParametros.add(p.tipo().getText());
+    for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
+        tiposParametros.add(p.tipo().getText());
+    }
+
+    funciones.put(nombreFuncion, tiposParametros);
+
+    String tipoAnterior = tipoFuncionActual;
+    tipoFuncionActual = tipoRetorno;
+
+    tabla.entrarScope();
+
+    for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
+
+        String tipo = p.tipo().getText();
+        String nombre = p.ID().getText();
+
+        tabla.declarar(nombre, tipo, "param");
+    }
+
+    visit(ctx.bloqueCodigo());
+
+    tabla.salirScope();
+
+    tipoFuncionActual = tipoAnterior;
+
+    return null;
+}
+
+@Override
+public Void visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) {
+
+    if (tipoFuncionActual == null) {
+        return null;
+    }
+
+    if (ctx.expresiones() == null) {
+
+        if (!tipoFuncionActual.equals("vasto")) {
+
+            error = true;
+
+            erroresSemanticos.append(
+                "Error semántico: la función debe retornar "
+                + tipoFuncionActual
+                + "\n"
+            );
         }
-
-        funciones.put(nombreFuncion, tiposParametros);
-        tiposFunciones.put(nombreFuncion, tipoRetorno);
-
-        tabla.entrarScope();
-
-        for (MiGramaticaParser.ParametroContext p : ctx.parametro()) {
-
-            String tipo = p.tipo().getText();
-            String nombre = p.ID().getText();
-
-            tabla.declarar(nombre, tipo, "param");
-        }
-
-        visit(ctx.bloqueCodigo());
-
-        tabla.salirScope();
 
         return null;
     }
+
+    String tipoRetornado = obtenerTipo(ctx.expresiones());
+
+    if (!tipoFuncionActual.equals(tipoRetornado)) {
+
+        error = true;
+
+        erroresSemanticos.append(
+            "Error semántico: la función retorna "
+            + tipoRetornado
+            + " pero debe retornar "
+            + tipoFuncionActual
+            + "\n"
+        );
+    }
+
+    return null;
+}
 
     // ================= INPUT =================
 

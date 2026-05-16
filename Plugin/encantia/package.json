@@ -1,17 +1,23 @@
 {
   "name": "encantia",
+  "publisher": "ChristopherClopezv",
   "displayName": "encantia-lang",
   "description": "Lenguaje encantia",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "icon": "encantia.png",
   "engines": {
     "vscode": "^1.108.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+  "onCommand:encantia.run",
+  "onLanguage:encantia"
+],
   "main": "./dist/extension.js",
   "contributes": {
+
      "commands": [
     {
       "command": "encantia.run",
@@ -56,7 +62,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.118.0",
+    "@types/vscode": "^1.108.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
     "typescript-eslint": "^8.56.1",

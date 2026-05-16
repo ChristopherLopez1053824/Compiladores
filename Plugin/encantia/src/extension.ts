@@ -23,8 +23,9 @@ export function activate(context: vscode.ExtensionContext) {
             const filePath =
                     editor.document.fileName;
 
-            const jarPath =
-                    '/home/christopher/Compiladores/Proyecto1Paraplugin/target/lab1-1.0-SNAPSHOT.jar';
+            const jarPath = context.asAbsolutePath(
+                'bin/encantia.jar'
+            );
 
             const terminal =
                     vscode.window.createTerminal(

@@ -1,0 +1,13 @@
+{
+  "extends": "vs-seti",
+
+  "iconDefinitions": {
+    "_encantia_file": {
+      "iconPath": "../icons/encantia-file.png"
+    }
+  },
+
+  "fileExtensions": {
+    "encantia": "_encantia_file"
+  }
+}

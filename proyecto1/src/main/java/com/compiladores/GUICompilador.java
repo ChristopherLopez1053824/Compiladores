@@ -32,6 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.CharStream;
@@ -96,7 +98,7 @@ public class GUICompilador extends JFrame {
 
     private void configurarVentana() {
 
-        setTitle("✨ Compilador Fantasía - Juan Estrada, Christopher, Nicolle West✨");
+        setTitle("✨ Compilador Fantasía - Juan Estrada, Christopher Lopez, Nicolle West✨");
 
         setSize(1600, 900);
 
@@ -228,16 +230,26 @@ public class GUICompilador extends JFrame {
 
         sidebar.add(Box.createVerticalGlue());
 
-        JLabel mago = new JLabel("🧙");
+        // ================= IMAGEN LOGO =================
 
-        mago.setFont(
-                new Font("Segoe UI Emoji",
-                        Font.PLAIN,
-                        75));
+        ImageIcon logoIcon = new ImageIcon(
+    GUICompilador.class.getResource("/Icon/encantia.png")
+);
 
-        mago.setAlignmentX(Component.CENTER_ALIGNMENT);
+        Image imagenEscalada =
+                logoIcon.getImage().getScaledInstance(
+                        150,
+                        150,
+                        Image.SCALE_SMOOTH);
 
-        sidebar.add(mago);
+        JLabel logo =
+                new JLabel(
+                        new ImageIcon(imagenEscalada));
+
+        logo.setAlignmentX(
+                Component.CENTER_ALIGNMENT);
+
+        sidebar.add(logo);
 
         add(sidebar, BorderLayout.WEST);
 
@@ -805,7 +817,7 @@ public class GUICompilador extends JFrame {
             panelArbol.repaint();
 
             consola.append(
-                    "🧹 Archivos anteriores eliminados\n\n");
+                    "Archivos se leyo bien\n\n");
 
             String codigo =
                     editorCodigo.getText();
@@ -879,7 +891,7 @@ public class GUICompilador extends JFrame {
             writer.close();
 
             consola.append(
-                    "✅ Nuevo Programa.java generado correctamente\n");
+                    "Se genero todo correctamente\n");
 
         } catch (Exception ex) {
 
@@ -903,7 +915,7 @@ public class GUICompilador extends JFrame {
         try {
 
             consola.append(
-                    "\n🚀 Ejecutando programa...\n\n");
+                    "\nEjecutando programa...\n\n");
 
             ProcessBuilder compilador =
                     new ProcessBuilder(
@@ -978,7 +990,7 @@ public class GUICompilador extends JFrame {
             procesoEjecutar.waitFor();
 
             consola.append(
-                    "========== SALIDA ==========\n\n");
+                    "=========================\n\n");
 
             consola.append(
                     salida.toString());

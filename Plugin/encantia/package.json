@@ -1,9 +1,9 @@
 {
   "name": "encantia",
   "publisher": "ChristopherClopezv",
-  "displayName": "encantia-lang",
+  "displayName": "Encantia",
   "description": "Lenguaje encantia",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "icon": "encantia.png",
   "engines": {
     "vscode": "^1.108.0"

@@ -85,6 +85,18 @@ public interface MiGramaticaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCicloFor(MiGramaticaParser.CicloForContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiGramaticaParser#inicioFor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInicioFor(MiGramaticaParser.InicioForContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiGramaticaParser#actualizacionFor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MiGramaticaParser#returnDentro}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

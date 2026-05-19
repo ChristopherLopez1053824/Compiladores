@@ -130,6 +130,26 @@ public interface MiGramaticaListener extends ParseTreeListener {
 	 */
 	void exitCicloFor(MiGramaticaParser.CicloForContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#inicioFor}.
+	 * @param ctx the parse tree
+	 */
+	void enterInicioFor(MiGramaticaParser.InicioForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#inicioFor}.
+	 * @param ctx the parse tree
+	 */
+	void exitInicioFor(MiGramaticaParser.InicioForContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiGramaticaParser#actualizacionFor}.
+	 * @param ctx the parse tree
+	 */
+	void enterActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiGramaticaParser#actualizacionFor}.
+	 * @param ctx the parse tree
+	 */
+	void exitActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MiGramaticaParser#returnDentro}.
 	 * @param ctx the parse tree
 	 */

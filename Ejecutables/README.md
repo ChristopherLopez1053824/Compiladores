@@ -3,10 +3,10 @@ En esta carpeta encontrarás 4 archivos importantes para poder ejecutar el progr
 1. Archivo .exe (Windows)
 Este archivo se utiliza para ejecutar el programa en computadoras con sistema operativo Windows.
 
-2. Archivo .deb (Linux)
-Este archivo permite instalar y ejecutar el programa en sistemas operativos Linux.
+2. Archivo .zip (Linux)
+Este archivo contiene la versión ejecutable del compilador para sistemas operativos Linux. Incluye todas las dependencias necesarias y un entorno de ejecución de Java integrado, para ello ingresaremos a la carpeta bin y le daremos doble click al archivo de esa carpeta.
 
-3. Archivo .app (MacOS)
+3. Archivo .dmg (MacOS)
 Este archivo está diseñado para ejecutar el programa en computadoras con MacOS.
 
 4. Archivo .vsix

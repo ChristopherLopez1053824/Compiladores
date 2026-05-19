@@ -163,6 +163,30 @@ public class MiGramaticaBaseListener implements MiGramaticaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInicioFor(MiGramaticaParser.InicioForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInicioFor(MiGramaticaParser.InicioForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) { }
 	/**
 	 * {@inheritDoc}

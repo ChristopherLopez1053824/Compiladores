@@ -1,4 +1,5 @@
 com/compiladores/antlr/MiGramaticaParser$ImportacionContext.class
+com/compiladores/antlr/MiGramaticaParser$InicioForContext.class
 com/compiladores/antlr/MiGramaticaLexer.class
 com/compiladores/antlr/MiGramaticaParser$ParametroContext.class
 com/compiladores/antlr/MiGramaticaParser$LlamadaFuncionContext.class
@@ -13,6 +14,7 @@ com/compiladores/antlr/MiGramaticaParser$PrintDentroContext.class
 com/compiladores/antlr/MiGramaticaParser$ConstantesContext.class
 com/compiladores/antlr/MiGramaticaParser.class
 com/compiladores/antlr/MiGramaticaListener.class
+com/compiladores/antlr/MiGramaticaParser$ActualizacionForContext.class
 com/compiladores/antlr/MiGramaticaParser$TipoContext.class
 com/compiladores/antlr/MiGramaticaParser$AsignacionContext.class
 com/compiladores/antlr/MiGramaticaBaseListener.class

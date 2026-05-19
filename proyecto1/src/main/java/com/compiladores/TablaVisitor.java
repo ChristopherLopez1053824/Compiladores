@@ -103,7 +103,7 @@ public class TablaVisitor extends MiGramaticaBaseVisitor<Void> {
                     "Error semántico: variable '" +
                             nombre +
                             "' no declarada\n");
-
+        tabla.obtener(nombre).valor = ctx.expresiones().getText();
             return null;
         }
 

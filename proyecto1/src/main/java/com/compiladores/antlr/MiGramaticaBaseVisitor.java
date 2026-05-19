@@ -104,6 +104,20 @@ public class MiGramaticaBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitInicioFor(MiGramaticaParser.InicioForContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitActualizacionFor(MiGramaticaParser.ActualizacionForContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitReturnDentro(MiGramaticaParser.ReturnDentroContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

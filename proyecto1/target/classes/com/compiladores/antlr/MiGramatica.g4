@@ -68,11 +68,23 @@ cicloWhile
 
 cicloFor
     : FOR PARENTESIS_A
-      (variables | asignacion | PUNTO_Y_COMA)
+      inicioFor
       expresiones? PUNTO_Y_COMA
-      expresiones?
+      actualizacionFor?
       PARENTESIS_C
       bloqueCodigo
+    ;
+
+inicioFor
+    : variables
+    | asignacion
+    | PUNTO_Y_COMA
+    ;
+
+actualizacionFor
+    : ID IGUAL expresiones
+    | ID INCREMENTO
+    | ID DECREMENTO
     ;
 
 // -------- FUNCIONES INTERNAS --------
@@ -185,6 +197,8 @@ BOOLEAN_CONSTANTE : 'true' | 'false';
 ID : [a-zA-Z_][a-zA-Z_0-9]*;
 
 // OPERADORES
+INCREMENTO : '++';
+DECREMENTO : '--';
 IGUAL : '=';
 SUMA : '+';
 RESTA : '-';

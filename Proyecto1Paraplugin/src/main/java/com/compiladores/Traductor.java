@@ -134,11 +134,39 @@ public class Traductor extends MiGramaticaBaseVisitor<Void> {
     @Override
     public Void visitCicloFor(MiGramaticaParser.CicloForContext ctx) {
 
-        String init = ctx.getChild(2).getText();
-        String cond = ctx.expresiones(0) != null ? ctx.expresiones(0).getText() : "";
-        String update = ctx.expresiones(1) != null ? ctx.expresiones(1).getText() : "";
+        String init = "";
 
-        imprimir("for (" + init + " " + cond + "; " + update + ")");
+        if (ctx.inicioFor().variables() != null) {
+
+            String tipo = traducirTipo(ctx.inicioFor().variables().tipo().getText());
+            String id = ctx.inicioFor().variables().ID().getText();
+
+            if (ctx.inicioFor().variables().expresiones() != null) {
+                init = tipo + " " + id + " = " + ctx.inicioFor().variables().expresiones().getText();
+            } else {
+                init = tipo + " " + id;
+            }
+
+        } else if (ctx.inicioFor().asignacion() != null) {
+
+            init = ctx.inicioFor().asignacion().ID().getText()
+                    + " = "
+                    + ctx.inicioFor().asignacion().expresiones().getText();
+        }
+
+        String cond = "";
+
+        if (ctx.expresiones() != null) {
+            cond = ctx.expresiones().getText();
+        }
+
+        String update = "";
+
+        if (ctx.actualizacionFor() != null) {
+            update = ctx.actualizacionFor().getText();
+        }
+
+        imprimir("for (" + init + "; " + cond + "; " + update + ")");
 
         visit(ctx.bloqueCodigo());
 

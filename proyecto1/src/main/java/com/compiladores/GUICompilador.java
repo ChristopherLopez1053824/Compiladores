@@ -96,7 +96,7 @@ public class GUICompilador extends JFrame {
 
     private void configurarVentana() {
 
-        setTitle("✨ Compilador Fantasía - Juan Estrada, Christopher Lopez, Nicolle West✨");
+        setTitle("✨ Compilador Fantasía - Juan Estrada, Christopher, Nicolle West✨");
 
         setSize(1600, 900);
 

@@ -20,12 +20,14 @@ Ahí hay un archivo en formato PDF donde se explica:
     - La sintaxis que debes utilizar
     - Ejemplos básicos
 
+O pueden ingresar al siguiente link, donde se encuentra de forma más dinámica y expresiva la forma de programar en el lenguaje encantia: https://encantia.doppio.cloud/
 
-3. Usar los ejecutables
+
+3. Usar los ejecutables 
 
 En la carpeta “Ejecutables” encontrarás dos archivos importantes:
 
-    • Archivo .exe
+    • Archivo .exe (Este archivo no permite la funconalidad convoca)
         Este archivo te permite ejecutar el programa de Encantia.  
 
         Al abrirlo, verás una ventana donde debes seguir este orden de pasos:
@@ -34,7 +36,7 @@ En la carpeta “Ejecutables” encontrarás dos archivos importantes:
             3. Ejecutar
             4. Limpiar o Guardar
 
-    • Archivo .vsix
+    • Archivo .vsix (Este archivo permite la funconalidad convoca)
         Este archivo es una extensión (plugin) para el editor de código.
 
         • Para instalar el plugin existen dos formas posibles de realizarlo:

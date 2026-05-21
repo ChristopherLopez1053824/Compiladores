@@ -1,0 +1,11 @@
+comienza {
+
+    intenso numero = 5;
+
+    guardian(numero > 0) {
+
+        Divulga(numero);
+
+        numero = numero - 1;
+    }
+}

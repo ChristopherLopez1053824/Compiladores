@@ -1,0 +1,11 @@
+convoca "Prueba35.encantia";
+
+comienza {
+
+   intenso numero = 16;
+   intenso num = 8;
+
+   intenso suma = sumar(numero, num);
+
+   Divulga("La suma es: " + suma);
+}

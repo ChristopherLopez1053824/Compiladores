@@ -1,0 +1,13 @@
+comienza {
+
+   intenso numero = 0;
+
+   guardian (numero != 5) {
+
+      Divulga(numero);
+      numero = numero + 1;
+
+   }
+
+   Divulga("Ciclo finalizado");
+}

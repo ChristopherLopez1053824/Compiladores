@@ -748,7 +748,7 @@ public class GUICompilador extends JFrame {
 
                 // ================= GUARDAR JAVA =================
 
-                File archivoJava = new File(nombre + ".java");
+                File archivoJava = new File(nombre + ".encantia");
 
                 PrintWriter writerJava = new PrintWriter(archivoJava);
 
